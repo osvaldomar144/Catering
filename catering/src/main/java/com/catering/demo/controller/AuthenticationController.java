@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.catering.demo.controller.validator.CredentialsValidator;
+import com.catering.demo.controller.validator.UserValidator;
 import com.catering.demo.model.Credentials;
 import com.catering.demo.model.User;
 import com.catering.demo.service.CredentialsService;
@@ -23,6 +25,12 @@ public class AuthenticationController {
 	@Autowired
 	private CredentialsService credentialsService;
 	
+	@Autowired
+	private UserValidator userValidator;
+	
+	@Autowired
+	private CredentialsValidator credentialsValidator;
+	
 	@RequestMapping(value="/register", method=RequestMethod.GET)
 	public String showRegisterForm(Model model) {
 		model.addAttribute("user", new User());
@@ -32,7 +40,6 @@ public class AuthenticationController {
 	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String showLoginForm(Model model) {
-		model.addAttribute("credentials", new Credentials());
 		return "Authentication/loginForm";
 	}
 	
@@ -43,13 +50,11 @@ public class AuthenticationController {
 	
 	@RequestMapping(value="/default", method=RequestMethod.GET)
 	public String defaultAfterLogin(Model model) {
-		System.out.println("defaultAfterLogin dentro if");
-		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext();
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
 		if(credentials.getRuolo().equals(Credentials.ADMIN_ROLE)) {
 			return "admin/dashboard";
 		}
-		System.out.println("defaultAfterLogin fuori if");
 		return "homepage";
 
 	}
@@ -60,16 +65,16 @@ public class AuthenticationController {
 							   @Valid @ModelAttribute("credentials") Credentials credentials,
 							    BindingResult credentialsBindingResult,
 							    Model model) {
-		System.out.println(user.getNome() + user.getCognome());
-		System.out.println(credentials.getUsername() + credentials.getPassword());
+		
+        // validazione user e credenziali
+        this.userValidator.validate(user, userBindingResult);
+        this.credentialsValidator.validate(credentials, credentialsBindingResult);
+
 		if(!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
-			System.out.println("IN TEORIA E' ENTRATO QUI");
 			credentials.setUser(user);
 			credentialsService.saveCredentials(credentials);
 			return "Authentication/registrationSuccessful";
 		}
-		System.out.println(userBindingResult.toString());
-		System.out.println(credentialsBindingResult.toString());
 		return "Authentication/registerForm";
 		
 	}
