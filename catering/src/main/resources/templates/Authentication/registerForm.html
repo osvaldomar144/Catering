@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Register Form</title>
+</head>
+<body>
+	<h2>Register</h2>
+	<form th:action="@{/register}" method="post">
+	<div th:object="${user}">
+		<div th:if="${#fields.hasGlobalErrors()}">
+			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+		</div>
+		<div>Nome:<br><input type="text" th:field="*{nome}"></div>
+		<div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+		
+		<div>Cognome:<br><input type="text" th:field="*{cognome}"></div>
+		<div th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></div>
+	</div>
+	<div th:object="${credentials}">
+		<div th:if="${#fields.hasGlobalErrors()}">
+			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+		</div>
+		<div>Username:<br><input type="text" th:field="*{username}"></div>
+		<div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+		
+		<div>Password:<br><input type="text" th:field="*{password}"></div>
+		<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+	</div>
+		
+		<div><button type="submit">Conferma</button></div>
+	</form>
+</body>
+</html>

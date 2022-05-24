@@ -1,14 +1,17 @@
 package com.catering.demo.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 @Entity
+@Table(name = "users")
 public class User {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,7 +23,7 @@ public class User {
 	@NotBlank
 	private String cognome;
 	
-	@OneToOne(fetch = FetchType.EAGER, mappedBy="user")
+	@OneToOne(fetch = FetchType.EAGER, mappedBy="user", cascade = CascadeType.ALL)
 	private Credentials credentials;
 
 	

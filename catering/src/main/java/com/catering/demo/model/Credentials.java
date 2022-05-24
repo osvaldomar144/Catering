@@ -1,30 +1,38 @@
 package com.catering.demo.model;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Credentials {
+	
+	/* Ruoli */
+	public static final String GENERIC_USER_ROLE = "GENERIC_USER";
+	public static final String ADMIN_ROLE = "ADMIN";
+	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	@NotBlank
+	@Column (unique = true)
+	@Size (min = 3, max = 15)
 	private String username;
 	
 	@NotBlank
+	@Size (min = 8, max = 255)
 	private String password;
 	
-	@NotBlank
-	@OneToOne (fetch=FetchType.EAGER)
-	private Ruolo ruolo;
+	private String ruolo;
 	
-	@OneToOne
+	@OneToOne (cascade = CascadeType.ALL)
 	private User user;
 
 	
@@ -49,16 +57,20 @@ public class Credentials {
 		this.password = password;
 	}
 
-	public Ruolo getRuolo() {
+	public String getRuolo() {
 		return ruolo;
 	}
 
-	public void setRuolo(Ruolo ruolo) {
+	public void setRuolo(String ruolo) {
 		this.ruolo = ruolo;
 	}
 
 	public User getUser() {
 		return user;
+	}
+	
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }
