@@ -13,7 +13,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -33,7 +33,7 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter{
 			.antMatchers(HttpMethod.GET, "/", "/homepage", "/login", "/register", "/css/**", "/images/**").permitAll()
 			//chiunque (autenticato o no) puo' mandare richieste POST al punto di accesso
 			.antMatchers(HttpMethod.POST, "/login", "/register").permitAll()
-			//solo gli utenti autenticati con ruolo admin possono accedere a risorse con 
+			//solo gli utenti autenticati con ruolo admin possono accedere a risorse con path /admin/**
 			.antMatchers(HttpMethod.GET, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
 			.antMatchers(HttpMethod.POST, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
 			.anyRequest().authenticated()
@@ -46,14 +46,13 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter{
 			.loginPage("/login")
 			//se il login ha successo, si viene rediretti al path /default
 			.defaultSuccessUrl("/default")
-			
+
 			//logout paragraph: qui definiamo il logout
-			.and()
-			.logout()
+			.and().logout()
 			//il logout è attivato con una richiesta GET a "/logout"
 			.logoutUrl("/logout")
 			//in caso di successo, si viene reindirizzati all'index
-			.logoutSuccessUrl("/home")
+			.logoutSuccessUrl("/")
 			.invalidateHttpSession(true)
 			.deleteCookies("JSESSIONID")
 			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
@@ -73,6 +72,6 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter{
 	
 	@Bean
 	PasswordEncoder passwordEncoder() {
-		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		return new BCryptPasswordEncoder();
 	}
 }

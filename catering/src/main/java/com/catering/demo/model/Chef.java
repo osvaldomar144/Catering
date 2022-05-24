@@ -2,6 +2,7 @@ package com.catering.demo.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +12,9 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Chef {
+	
+	public static final String DIR_PAGES_CHEF = "informations/chef/";
+	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -24,7 +28,7 @@ public class Chef {
 	@NotBlank
 	private String nazionalita;
 
-	@OneToMany (mappedBy="chef")
+	@OneToMany (mappedBy="chef", cascade=CascadeType.ALL)
 	private List<Buffet> buffets;
 
 	
@@ -59,6 +63,10 @@ public class Chef {
 
 	public List<Buffet> getBuffets() {
 		return buffets;
+	}
+	
+	public void setBuffets(List<Buffet> buffets) {
+		this.buffets = buffets;
 	}
 	
 }

@@ -9,24 +9,18 @@
 	<h2>Register</h2>
 	<form th:action="@{/register}" method="post">
 	<div th:object="${user}">
-		<div th:if="${#fields.hasGlobalErrors()}">
-			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
-		</div>
-		<div>Nome:<br><input type="text" th:field="*{nome}"></div>
-		<div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+		<div>Nome:<br><input type="text" placeholeder="Nome" th:field="*{nome}"  required></div>
+		<div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" th:style="'color:red'"></div>
 		
-		<div>Cognome:<br><input type="text" th:field="*{cognome}"></div>
-		<div th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></div>
+		<div>Cognome:<br><input type="text" placeholeder="Cognome" th:field="*{cognome}" required></div>
+		<div th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}" th:style="'color:red'"></div>
 	</div>
 	<div th:object="${credentials}">
-		<div th:if="${#fields.hasGlobalErrors()}">
-			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
-		</div>
-		<div>Username:<br><input type="text" th:field="*{username}"></div>
-		<div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+		<div>Username:<br><input type="text" placeholeder="Username" th:field="*{username}" required></div>
+		<div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" th:style="'color:red'"></div>
 		
-		<div>Password:<br><input type="text" th:field="*{password}"></div>
-		<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+		<div>Password:<br><input type="password" placeholeder="Password" th:field="*{password}" required></div>
+		<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" th:style="'color:red'"></div>
 	</div>
 		
 		<div><button type="submit">Conferma</button></div>
