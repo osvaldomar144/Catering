@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-	<meta charset="UTF-8" />
-	<title>Login</title>
-</head>
+<head th:replace="fragments/layout.html :: headerfiles(title='Login')"> </head>
 <body>
+	<header th:replace="fragments/layout.html :: navMenu"></header>
+	
 	<form th:action="@{/login}" method="post">
 		<div>Username:<br><input type="text" name="username" required></div>
 		
@@ -12,5 +11,7 @@
 		
 		<div><button type="submit">Conferma</button></div>
 	</form>
+
+	<footer th:replace="fragments/layout.html :: fondo(back='/')"></footer>
 </body>
 </html>

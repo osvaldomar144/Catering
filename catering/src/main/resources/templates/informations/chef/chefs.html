@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Elenco Chefs</title>
-</head>
+<head th:replace="fragments/layout.html :: headerfiles(title='Elenco chefs')"> </head>
 <body>
+	<header th:replace="fragments/layout.html :: navMenu"></header>
+
 	<h2>Elenco Chefs</h2>
+	<ul>
+		<li th:each="chef : ${chefs}">
+			<a th:href="@{'/chef/' + ${chef.id}}" 
+			   th:text="${chef.nome} + ' ' + ${chef.cognome}">Paolo Rossi</a>
+		</li>
+	</ul>
+	<br>
+	
+	<footer th:replace="fragments/layout.html :: fondo(back='/')"></footer>
 </body>
 </html>

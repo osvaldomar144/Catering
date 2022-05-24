@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Dashboard Admin</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout.html :: headerfiles(title='Dashboard')"> </head>
 <body>
-	<h2>Dashboard</h2>
+	<header th:replace="fragments/layout.html :: navMenu"></header>
+
+	<h2>Dashboard</h2><br>
+	<a th:href="@{/logout}">LogOut</a>
+
+	<footer th:replace="fragments/layout.html :: fondo(back='/')"></footer>
 </body>
 </html>

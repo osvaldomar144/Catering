@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Single Chef</title>
-</head>
+<head th:replace="fragments/layout.html :: headerfiles(title='Informazioni Chef')"> </head>
 <body>
+	<header th:replace="fragments/layout.html :: navMenu"></header>
+
 	<div th:object="${chef}">
-		<h2 th:text="*{nome}">Chef</h2>
+		<h2 th:text="*{nome} + ' ' + *{cognome} + ' ' + *{nazionalita}">Chef</h2>
 	</div>
+
+	<footer th:replace="fragments/layout.html :: fondo(back='/chef')"></footer>
 </body>
 </html>

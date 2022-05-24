@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Registrazione Success</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout.html :: headerfiles(title='Registration Successfuly')"> </head>
 <body>
+	<header th:replace="fragments/layout.html :: navMenu"></header>
+
 	<h2>Registrazione avvenuta con successo!</h2>
+
+	<footer th:replace="fragments/layout.html :: fondo(back='/')"></footer>
 </body>
 </html>

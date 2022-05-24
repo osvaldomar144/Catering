@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Homepage</title>
-</head>
+<head th:replace="fragments/layout.html :: headerfiles(title='Homepage')"> </head>
 <body>
+	<header th:replace="fragments/layout.html :: navMenu"></header>
+
 	<h2>Homepage Catering</h2>
+	<a th:href="@{/chef}">Elenco Chef</a><br>
 	<a th:href="@{/login}">Login</a>
 	<br>
 	<a th:href="@{/register}">Register</a>
+
+	<footer th:replace="fragments/layout.html :: fondo(back='/')"></footer>
 </body>
 </html>
