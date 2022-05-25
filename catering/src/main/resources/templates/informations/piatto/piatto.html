@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout.html :: headerfiles(title='Informazioni Piatto')"> </head>
+<body>
+	<header th:replace="fragments/layout.html :: navMenu"></header>
+
+	<div th:object="${piatto}">
+		<h2 th:text="*{nome} + ' ' + *{descrizione}">Piatto</h2>
+
+		<h3>Elenco Ingredienti Piatto</h3>
+		<ul>
+			<li th:each="ingrediente : *{ingredienti}">
+				<p th:text="${ingrediente.nome}"></p>
+			</li>
+		</ul>
+	</div>
+
+	<footer th:replace="fragments/layout.html :: fondo(back='/piatti')"></footer>
+</body>
+</html>

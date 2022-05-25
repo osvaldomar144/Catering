@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout.html :: headerfiles(title='Informazioni Buffet')"> </head>
+<body>
+	<header th:replace="fragments/layout.html :: navMenu"></header>
+
+	<div th:object="${buffet}">
+		<h2 th:text="*{nome} + ' ' + *{descrizione} + ' ' + *{chef.nome}">Buffet</h2>
+	</div>
+
+	<footer th:replace="fragments/layout.html :: fondo(back='/buffet')"></footer>
+</body>
+</html>

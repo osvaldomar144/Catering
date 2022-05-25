@@ -6,6 +6,14 @@
 
 	<div th:object="${chef}">
 		<h2 th:text="*{nome} + ' ' + *{cognome} + ' ' + *{nazionalita}">Chef</h2>
+
+		<h3>Elenco Buffets Proposti dallo Chef</h3>
+		<ul>
+			<li th:each="buffet : *{buffets}">
+				<a th:href="@{'/buffet/' + ${buffet.id}}" 
+				   th:text="${buffet.nome} + ' ' + ${buffet.descrizione}">Buffet</a>
+			</li>
+		</ul>
 	</div>
 
 	<footer th:replace="fragments/layout.html :: fondo(back='/chef')"></footer>

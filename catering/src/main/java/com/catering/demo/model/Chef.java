@@ -31,7 +31,6 @@ public class Chef {
 	@OneToMany (mappedBy="chef", cascade=CascadeType.ALL)
 	private List<Buffet> buffets;
 
-	
 	/* methods */
 	public Long getId() {
 		return id;
@@ -64,7 +63,7 @@ public class Chef {
 	public List<Buffet> getBuffets() {
 		return buffets;
 	}
-	
+
 	public void setBuffets(List<Buffet> buffets) {
 		this.buffets = buffets;
 	}

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout.html :: headerfiles(title='Elenco Buffets')"> </head>
+<body>
+	<header th:replace="fragments/layout.html :: navMenu"></header>
+
+	<h2>Elenco Buffets</h2>
+	<ul>
+		<li th:each="buffet : ${buffets}">
+			<a th:href="@{'/buffet/' + ${buffet.id}}" 
+			   th:text="${buffet.nome}">Paolo Rossi</a>
+			<p th:text="${buffet.descrizione}">Descrizione</p>
+		</li>
+	</ul>
+	<br>
+	
+	<footer th:replace="fragments/layout.html :: fondo(back='/')"></footer>
+</body>
+</html>

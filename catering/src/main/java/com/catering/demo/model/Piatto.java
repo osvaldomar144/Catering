@@ -12,6 +12,9 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Piatto {
+	
+	public static final String DIR_PAGES_PIATTO = "informations/piatto/";
+	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -52,8 +55,18 @@ public class Piatto {
 	public List<Buffet> getBuffets() {
 		return buffets;
 	}
+	
+	public void setBuffets(List<Buffet> buffets) {
+		this.buffets = buffets;
+	}
 
 	public List<Ingrediente> getIngredienti() {
 		return ingredienti;
 	}
+	
+	public void setIngredienti(List<Ingrediente> ingredienti) {
+		this.ingredienti = ingredienti;
+	}
+	
+	
 }

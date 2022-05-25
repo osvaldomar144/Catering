@@ -29,7 +29,7 @@ public class ChefController {
 	}
 	
 	@GetMapping("/chef/{id}")
-	public String getSingleChef(@PathVariable("id") Long id, Model model) {
+	public String getSingoloChef(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("chef", this.chefService.findById(id));
 		return DIR_PAGES_CHEF + "chef";
 	}

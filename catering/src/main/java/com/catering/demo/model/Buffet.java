@@ -2,7 +2,7 @@ package com.catering.demo.model;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +13,9 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Buffet {
+	
+	public static final String DIR_PAGES_BUFFET = "informations/buffet/";
+	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -20,6 +23,7 @@ public class Buffet {
 	@NotBlank
 	private String nome;
 	
+	@Column
 	private String descrizione;
 	
 	@ManyToOne
@@ -27,7 +31,6 @@ public class Buffet {
 	
 	@ManyToMany(mappedBy="buffets")
 	private List<Piatto> piatti;
-
 	
 	/* methods */
 	public Long getId() {
@@ -61,4 +64,9 @@ public class Buffet {
 	public List<Piatto> getPiatti() {
 		return piatti;
 	}
+
+	public void setPiatti(List<Piatto> piatti) {
+		this.piatti = piatti;
+	}
+
 }
