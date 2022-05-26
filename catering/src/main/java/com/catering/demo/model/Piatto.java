@@ -14,6 +14,7 @@ import javax.validation.constraints.NotBlank;
 public class Piatto {
 	
 	public static final String DIR_PAGES_PIATTO = "informations/piatto/";
+	public static final String DIR_ADMIN_PAGES_PIATTO = "admin/piatto/";
 	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO)

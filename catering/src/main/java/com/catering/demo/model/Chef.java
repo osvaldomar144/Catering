@@ -14,6 +14,7 @@ import javax.validation.constraints.NotBlank;
 public class Chef {
 	
 	public static final String DIR_PAGES_CHEF = "informations/chef/";
+	public static final String DIR_ADMIN_PAGES_CHEF = "admin/chef/";
 	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO)

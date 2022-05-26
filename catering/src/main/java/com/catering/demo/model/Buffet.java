@@ -15,6 +15,7 @@ import javax.validation.constraints.NotBlank;
 public class Buffet {
 	
 	public static final String DIR_PAGES_BUFFET = "informations/buffet/";
+	public static final String DIR_ADMIN_PAGES_BUFFET = "admin/buffet/";
 	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO)

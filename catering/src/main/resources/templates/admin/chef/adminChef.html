@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout.html :: headerfiles(title='Admin Chefs')"> </head>
+<body>
+	<header th:replace="fragments/layout.html :: navMenu"></header>
+
+	<h2>Elenco Chefs - Admin</h2>
+	<ul>
+		<li th:each="chef : ${chefs}">
+			<span th:text="${chef.nome} + ' ' + ${chef.cognome} + ' '">Paolo Rossi </span>
+		    <a th:href="@{'/admin/chef/modificaChef/' + ${chef.id}}">Modifica</a>
+			<a th:href="@{'/admin/chef/delete/' + ${chef.id}}">Delete</a>
+		</li>
+	</ul>
+	<br>
+	
+	<footer th:replace="fragments/layout.html :: fondo(back='/default')"></footer>
+</body>
+</html>

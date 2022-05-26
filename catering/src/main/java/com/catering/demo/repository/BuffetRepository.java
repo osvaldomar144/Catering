@@ -6,5 +6,5 @@ import com.catering.demo.model.Buffet;
 
 public interface BuffetRepository extends CrudRepository<Buffet, Long>{
 
-	public boolean existsByNomeAndDescrizioneAndChef(String nome, String descrizione, Long idChef);
+	public boolean existsByNomeAndDescrizione(String nome, String descrizione);
 }

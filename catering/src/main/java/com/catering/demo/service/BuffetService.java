@@ -28,11 +28,10 @@ public class BuffetService {
 	}
 	
 	@Transactional
-	public void update(Buffet buffet) {
-		Buffet b = buffetRepository.findById(buffet.getId()).get();
+	public void update(Buffet buffet, Long id) {
+		Buffet b = buffetRepository.findById(id).get();
 		b.setNome(buffet.getNome());
 		b.setDescrizione(buffet.getDescrizione());
-		b.setChef(buffet.getChef());
 		b.setPiatti(buffet.getPiatti());
 		buffetRepository.save(b);
 	}
@@ -50,8 +49,6 @@ public class BuffetService {
 	}
 	
 	public boolean alreadyExists(Buffet b) {
-		return buffetRepository.existsByNomeAndDescrizioneAndChef(b.getNome(), 
-																  b.getDescrizione(), 
-																  b.getChef().getId());
+		return buffetRepository.existsByNomeAndDescrizione(b.getNome(), b.getDescrizione());
 	}
 }
