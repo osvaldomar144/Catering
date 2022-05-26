@@ -12,7 +12,7 @@
 		<div>Nome:<br><input type="text" th:field="*{nome}"></div>
 		<div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
 		<br>
-		<div>Cognome:<br><input type="text" th:field="*{descrizione}"></div>
+		<div>Descrizione:<br><input type="text" th:field="*{descrizione}"></div>
 		<div th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></div>
 		<br>
 
@@ -27,6 +27,6 @@
 	</form>
 	<br>
 	
-	<footer th:replace="fragments/layout.html :: fondo(back='/admin/chef')"></footer>
+	<footer th:replace="fragments/layout.html :: fondo(back='/admin/chef/modificaChef/' + ${buffet.chef.id})"></footer>
 </body>
 </html>

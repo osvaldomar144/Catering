@@ -5,6 +5,8 @@
 	<header th:replace="fragments/layout.html :: navMenu"></header>
 
 	<h2>Elenco Chefs - Admin</h2>
+	<a th:href="@{/admin/chef/aggiungiChef}">Aggiungi Nuovo Chef</a>
+	<br>
 	<ul>
 		<li th:each="chef : ${chefs}">
 			<span th:text="${chef.nome} + ' ' + ${chef.cognome} + ' '">Paolo Rossi </span>

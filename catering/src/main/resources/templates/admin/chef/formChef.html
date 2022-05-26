@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/layout.html :: headerfiles(title='Modifica Chef')"> </head>
+<head th:replace="fragments/layout.html :: headerfiles(title='Aggiungi Chef')"> </head>
 <body>
 	<header th:replace="fragments/layout.html :: navMenu"></header>
 
-	<h2>Modifica Chef</h2>
-	<a th:href="@{/admin/buffet/aggiungiBuffet/} + ${chef.id}">Aggiungi Buffet</a>
-	<br>
-
-	<form th:action="@{/admin/chef/modificaChef/} + *{id}" method="post" th:object="${chef}">
+	<h2>Aggiungi Chef</h2>
+	<form th:action="@{/admin/chef/aggiungiChef}" method="post" th:object="${chef}">
 		 <div th:if="${#fields.hasGlobalErrors()}">
 			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
 		</div>
@@ -21,16 +18,7 @@
 		<div>Nazionalita:<br><input type="text" th:field="*{nazionalita}"></div>
 		<div th:if="${#fields.hasErrors('nazionalita')}" th:errors="*{nazionalita}"></div>
 		<br>
-
-		<ul>
-			<li th:each="buffet : *{buffets}">
-				<span th:text="${buffet.nome}">Nome Buffet</span>
-				<a th:href="@{/admin/buffet/modificaBuffet/} + ${buffet.id}"> Modifica</a>
-				<a th:href="@{/admin/chef/deleteBuffet/} + *{id} + '/' + ${buffet.id}"> Delete</a>
-			</li>
-		</ul>
-
-		<div><button type="submit">Modifica</button></div>
+		<div><button type="submit">Aggiungi</button></div>
 	</form>
 	<br>
 	
