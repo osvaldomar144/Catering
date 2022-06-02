@@ -31,7 +31,7 @@ public class ChefController {
 	
 	/* GENERIC USER */
 	
-	@GetMapping("/chef")
+	@GetMapping("/chefs")
 	public String getChefs(Model model) {
 		List<Chef> chefs = this.chefService.findAll();
 		model.addAttribute("chefs", chefs);

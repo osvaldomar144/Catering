@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/layout.html :: headerfiles(title='Homepage')"> </head>
+<head th:replace="fragments/layout.html :: headerfiles(title='Homepage')"></head>
 <body>
-	<header th:replace="fragments/layout.html :: navMenu"></header>
+	<div th:replace="fragments/layout.html :: heroArea">
+		<header th:replace="fragments/layout.html :: navMenu"></header>
+	</div>
 
 	<h2>Homepage Catering</h2>
-	<a th:href="@{/chef}">Elenco Chef</a><br>
-	<a th:href="@{/buffet}">Elenco Buffet</a><br>
-	<a th:href="@{/piatto}">Elenco Piatti</a><br><br><br>
+	<a th:href="@{/chefs}">Elenco Chef</a><br>
+	<a th:href="@{/buffets}">Elenco Buffet</a><br>
+	<a th:href="@{/piatti}">Elenco Piatti</a><br><br><br>
 	<a th:href="@{/default}">Dashboard</a><br><br>
 	<a th:href="@{/login}">Login</a>
 	<br>
 	<a th:href="@{/register}">Register</a>
 
 	<footer th:replace="fragments/layout.html :: fondo(back='/')"></footer>
+	<div th:replace="fragments/layout.html :: jsFiles"></div>
 </body>
 </html>

@@ -37,7 +37,7 @@ public class BuffetController {
 	
 	/* GENERIC USER */
 	
-	@GetMapping("/buffet")
+	@GetMapping("/buffets")
 	public String getBuffets(Model model) {
 		List<Buffet> buffets = this.buffetService.findAll();
 		model.addAttribute("buffets", buffets);
