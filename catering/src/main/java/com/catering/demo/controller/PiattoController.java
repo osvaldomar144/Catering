@@ -37,14 +37,14 @@ public class PiattoController {
 	
 	/* GENERIC USER */
 	
-	@GetMapping("/piatto")
+	@GetMapping("/piatti")
 	public String getPiatti(Model model) {
 		List<Piatto> piatti = this.piattoService.findAll();
 		model.addAttribute("piatti", piatti);
 		return DIR_PAGES_PIATTO + "piatti";
 	}
 	
-	@GetMapping("/piattos/{id}")
+	@GetMapping("/piatto/{id}")
 	public String getSingoloPiatto(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("piatto", this.piattoService.findById(id));
 		return DIR_PAGES_PIATTO + "piatto";

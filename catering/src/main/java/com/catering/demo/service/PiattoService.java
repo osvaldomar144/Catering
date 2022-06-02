@@ -49,6 +49,14 @@ public class PiattoService {
 		return piatti;
 	}
 	
+	@Transactional
+	public void addIngrediente(Long id, Ingrediente ingrediente) {
+		Piatto piatto = this.piattoRepository.findById(id).get();
+		//ingrediente.setBuffet(buffet);
+		piatto.getIngredienti().add(ingrediente);
+		this.piattoRepository.save(piatto);
+	}
+	
 	public List<Ingrediente> getIngredientiOfPiatto(Long id){
 		Piatto piatto = this.piattoRepository.findById(id).get();
 		return piatto.getIngredienti();

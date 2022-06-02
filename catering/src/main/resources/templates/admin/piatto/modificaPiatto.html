@@ -22,7 +22,7 @@
 		<ul>
 			<li th:each="ingrediente : ${ingredienti}">
 				<span th:text="${ingrediente.nome}">Nome Ingrediente</span>
-				<a th:href="@{/admin/ingrediente/modificaIngrediente} + ${ingrediente.id}"> Modifica</a>
+				<a th:href="@{/admin/ingrediente/modificaIngrediente/} + ${piatto.id} + '/' + ${ingrediente.id}"> Modifica</a>
 				<a th:href="@{/admin/ingrediente/delete/} + ${piatto.id} + '/' + ${ingrediente.id}"> Delete</a>
 			</li>
 		</ul>

@@ -8,6 +8,10 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Ingrediente {
+	
+	public static final String DIR_PAGES_INGREDIENTE = "informations/ingrediente/";
+	public static final String DIR_ADMIN_PAGES_INGREDIENTE = "admin/ingrediente/";
+	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -24,6 +28,10 @@ public class Ingrediente {
 	/* methods */
 	public Long getId() {
 		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNome() {
