@@ -4,11 +4,11 @@
 <body>
 	<header th:replace="fragments/layout.html :: navMenu"></header>
 
-	<h2>Modifica Buffet for Chef <strong th:text="${buffet.chef.nome}"></strong></h2>
-	<a th:href="@{/admin/piatto/aggiungiPiatto/} + ${buffet.id}">Aggiungi Piatto</a>
+	<h2>Modifica Piatto for Buffet <strong th:text="${piatto.buffet.nome}"></strong></h2>
+	<a th:href="@{/admin/ingrediente/aggiungiIngrediente/} + ${piatto.id}">Aggiungi Ingrediente</a>
 	<br>
 
-	<form th:action="@{/admin/buffet/modificaBuffet/} + *{chef.id} +'/'+ *{id}" method="post" th:object="${buffet}">
+	<form th:action="@{/admin/piatto/modificaPiatto/} + *{buffet.id} +'/'+ *{id}" method="post" th:object="${piatto}">
 		<div th:if="${#fields.hasGlobalErrors()}">
 			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
 		</div>
@@ -20,10 +20,10 @@
 		<br>
 
 		<ul>
-			<li th:each="piatto : ${piatti}">
-				<span th:text="${piatto.nome}">Nome Piatto</span>
-				<a th:href="@{/admin/piatto/modificaPiatto/} + ${piatto.id}"> Modifica</a>
-				<a th:href="@{/admin/piatto/delete/} + ${buffet.id} + '/' + ${piatto.id}"> Delete</a>
+			<li th:each="ingrediente : ${ingredienti}">
+				<span th:text="${ingrediente.nome}">Nome Ingrediente</span>
+				<a th:href="@{/admin/ingrediente/modificaIngrediente} + ${ingrediente.id}"> Modifica</a>
+				<a th:href="@{/admin/ingrediente/delete/} + ${piatto.id} + '/' + ${ingrediente.id}"> Delete</a>
 			</li>
 		</ul>
 
@@ -31,6 +31,6 @@
 	</form>
 	<br>
 	
-	<footer th:replace="fragments/layout.html :: fondo(back='/admin/chef/modificaChef/' + ${buffet.chef.id})"></footer>
+	<footer th:replace="fragments/layout.html :: fondo(back='/admin/buffet/modificaBuffet/' + ${piatto.buffet.id})"></footer>
 </body>
 </html>

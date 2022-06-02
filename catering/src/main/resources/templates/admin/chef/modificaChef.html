@@ -23,15 +23,16 @@
 		<br>
 
 		<ul>
-			<li th:each="buffet : *{buffets}">
+			<li th:each="buffet : ${buffets}">
 				<span th:text="${buffet.nome}">Nome Buffet</span>
 				<a th:href="@{/admin/buffet/modificaBuffet/} + ${buffet.id}"> Modifica</a>
-				<a th:href="@{/admin/chef/deleteBuffet/} + *{id} + '/' + ${buffet.id}"> Delete</a>
+				<a th:href="@{/admin/buffet/delete/} + ${chef.id} + '/' + ${buffet.id}"> Delete</a>
 			</li>
 		</ul>
 
 		<div><button type="submit">Modifica</button></div>
 	</form>
+	
 	<br>
 	
 	<footer th:replace="fragments/layout.html :: fondo(back='/admin/chef')"></footer>
