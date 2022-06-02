@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.catering.demo.model.Buffet;
+import com.catering.demo.model.Piatto;
 import com.catering.demo.repository.BuffetRepository;
 
 @Service
@@ -46,6 +47,19 @@ public class BuffetService {
 			buffets.add(c);
 		}	
 		return buffets;
+	}
+
+	@Transactional
+	public void addPiatto(Long id, Piatto piatto) {
+		Buffet buffet = this.buffetRepository.findById(id).get();
+		piatto.setBuffet(buffet);
+		buffet.getPiatti().add(piatto);
+		this.buffetRepository.save(buffet);
+	}
+
+	public List<Piatto> getPiattiOfBuffet(Long id){
+		Buffet buffet = this.buffetRepository.findById(id).get();
+		return buffet.getPiatti();
 	}
 	
 	public boolean alreadyExists(Buffet b) {

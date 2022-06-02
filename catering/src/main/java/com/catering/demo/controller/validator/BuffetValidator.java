@@ -6,7 +6,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import com.catering.demo.model.Buffet;
-import com.catering.demo.model.Chef;
 import com.catering.demo.service.BuffetService;
 
 @Component
@@ -26,6 +25,6 @@ public class BuffetValidator implements Validator{
 	
     @Override
     public boolean supports(Class<?> clazz) {
-        return Chef.class.equals(clazz);
+        return Buffet.class.equals(clazz);
     }
 }

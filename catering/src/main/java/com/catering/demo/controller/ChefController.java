@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.catering.demo.controller.validator.ChefValidator;
-import com.catering.demo.model.Buffet;
 import com.catering.demo.model.Chef;
-import com.catering.demo.service.BuffetService;
 import com.catering.demo.service.ChefService;
 
 @Controller
@@ -27,9 +25,6 @@ public class ChefController {
 
 	@Autowired
 	private ChefService chefService;
-	
-	@Autowired
-	private BuffetService buffetService;
 	
 	@Autowired
 	private ChefValidator chefValidator;
@@ -50,7 +45,8 @@ public class ChefController {
 	}
 	
 	/* ADMIN */
-	// -- elenco chefs
+	
+	// -- ELENCO CHEFS -- //
 	@GetMapping("/admin/chef")
 	public String adminChefs(Model model) {
 		List<Chef> chefs = this.chefService.findAll();
@@ -58,7 +54,7 @@ public class ChefController {
 		return DIR_ADMIN_PAGES_CHEF + "adminChef";
 	}
 	
-	// -- page con form per addChef
+	// -- INSERIMENTO -- //
 	@GetMapping("/admin/chef/aggiungiChef")
 	public String addChef(Model model) {
 		model.addAttribute("chef", new Chef());
@@ -76,47 +72,36 @@ public class ChefController {
 		return DIR_ADMIN_PAGES_CHEF + "formChef";
 	}
 	
+	// -- MODIFICA -- //
+	@GetMapping("/admin/chef/modificaChef/{id}")
+	public String selezionaChef(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("chef", this.chefService.findById(id));
+		model.addAttribute("buffets", this.chefService.getBuffetsOfChef(id));
+		return DIR_ADMIN_PAGES_CHEF + "modificaChef";
+	}
+	
+	@PostMapping("/admin/chef/modificaChef/{idChef}")
+	public String modificaChef(@ModelAttribute("chef") Chef chef,
+							   BindingResult bindingResult,
+							   @PathVariable("idChef") Long idChef,
+							   Model model) {
+		this.chefValidator.validate(chef, bindingResult);
+		chef.setId(idChef);
+		if(!bindingResult.hasErrors()) {
+			this.chefService.update(chef, chef.getId());
+			return this.adminChefs(model);
+		}
+		model.addAttribute("buffets", this.chefService.getBuffetsOfChef(idChef));
+		return  DIR_ADMIN_PAGES_CHEF + "modificaChef";
+	}
+	
+	// -- CANCELLAZIONE -- //
 	@GetMapping("/admin/chef/delete/{id}")
 	public String deleteChef(@PathVariable("id") Long id,  Model model) {
 		Chef chef = this.chefService.findById(id);
 		this.chefService.delete(chef);		
 		return this.adminChefs(model);
 	}
-	
-	@GetMapping("/admin/chef/modificaChef/{id}")
-	public String selezionaChef(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("chef", this.chefService.findById(id));
-		return DIR_ADMIN_PAGES_CHEF + "modificaChef";
-	}
-	
-	@PostMapping("/admin/chef/modificaChef/{id}")
-	public String modificaChef(@Valid @ModelAttribute("chef") Chef chef, 
-							   BindingResult bindingResult,
-							   @PathVariable("id") Long id,
-							   Model model) {
-		this.chefValidator.validate(chef, bindingResult);	
-		if(!bindingResult.hasErrors()) {
-			this.chefService.update(chef, id);
-			return this.adminChefs(model);
-		}
-		return DIR_ADMIN_PAGES_CHEF + "modificaChef";
-	}
-	
-	// -- gestione buffet per chef
-	
-	@GetMapping("/admin/chef/deleteBuffet/{idChef}/{idBuff}")
-	public String deleteBuffetFromList(@PathVariable("idChef") Long idChef,
-									   @PathVariable("idBuff") Long idBuff,
-									   Model model) {
-		Chef chef = this.chefService.findById(idChef);
-		Buffet buffet = this.buffetService.findById(idBuff);
-		chef.getBuffets().remove(buffet);
-		this.buffetService.delete(buffet);
-		this.chefService.save(chef);
-		return this.selezionaChef(idChef, model);
-	}
-	
-	
 	
 	
 	

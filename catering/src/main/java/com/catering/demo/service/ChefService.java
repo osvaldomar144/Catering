@@ -61,8 +61,12 @@ public class ChefService {
 	public void addBuffet(Long id, Buffet buffet) {
 		Chef c = this.chefRepository.findById(id).get();
 		buffet.setChef(c);
-		System.out.println("SERVICE " + c.getId());
 		c.getBuffets().add(buffet);
 		this.chefRepository.save(c);
+	}
+
+	public List<Buffet> getBuffetsOfChef(Long id){
+		Chef c = this.chefRepository.findById(id).get();
+		return c.getBuffets();
 	}
 }

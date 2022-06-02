@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
@@ -25,8 +25,8 @@ public class Piatto {
 	
 	private String descrizione;
 	
-	@ManyToMany
-	private List<Buffet> buffets;
+	@ManyToOne
+	private Buffet buffet;
 	
 	@OneToMany
 	private List<Ingrediente> ingredienti;
@@ -35,6 +35,10 @@ public class Piatto {
 	/* methods */
 	public Long getId() {
 		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -53,12 +57,12 @@ public class Piatto {
 		this.descrizione = descrizione;
 	}
 
-	public List<Buffet> getBuffets() {
-		return buffets;
+	public Buffet getBuffet() {
+		return buffet;
 	}
 	
-	public void setBuffets(List<Buffet> buffets) {
-		this.buffets = buffets;
+	public void setBuffet(Buffet buffet) {
+		this.buffet = buffet;
 	}
 
 	public List<Ingrediente> getIngredienti() {

@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.catering.demo.model.Ingrediente;
 import com.catering.demo.model.Piatto;
 import com.catering.demo.repository.PiattoRepository;
 
@@ -18,8 +19,8 @@ public class PiattoService {
 	private PiattoRepository piattoRepository;
 	
 	@Transactional
-	public void save(Piatto piatto) {
-		piattoRepository.save(piatto);
+	public Piatto save(Piatto piatto) {
+		return piattoRepository.save(piatto);
 	}
 	
 	@Transactional
@@ -28,11 +29,10 @@ public class PiattoService {
 	}
 	
 	@Transactional
-	public void update(Piatto piatto) {
-		Piatto p = piattoRepository.findById(piatto.getId()).get();
+	public void update(Piatto piatto, Long id) {
+		Piatto p = piattoRepository.findById(id).get();
 		p.setNome(piatto.getNome());
 		p.setDescrizione(piatto.getDescrizione());
-		p.setBuffets(piatto.getBuffets());
 		p.setIngredienti(piatto.getIngredienti());
 		piattoRepository.save(p);
 	}
@@ -47,6 +47,11 @@ public class PiattoService {
 			piatti.add(c);
 		}	
 		return piatti;
+	}
+	
+	public List<Ingrediente> getIngredientiOfPiatto(Long id){
+		Piatto piatto = this.piattoRepository.findById(id).get();
+		return piatto.getIngredienti();
 	}
 	
 	public boolean alreadyExists(Piatto p) {

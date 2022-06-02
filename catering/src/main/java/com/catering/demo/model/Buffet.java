@@ -2,13 +2,7 @@ package com.catering.demo.model;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -30,12 +24,16 @@ public class Buffet {
 	@ManyToOne
 	private Chef chef;
 	
-	@ManyToMany(mappedBy="buffets")
+	@OneToMany(mappedBy="buffet", cascade = CascadeType.ALL)
 	private List<Piatto> piatti;
 	
 	/* methods */
 	public Long getId() {
 		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNome() {
