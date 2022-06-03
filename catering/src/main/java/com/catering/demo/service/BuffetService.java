@@ -62,6 +62,11 @@ public class BuffetService {
 		return buffet.getPiatti();
 	}
 	
+	//PER HOMEPAGE
+	public List<Buffet> getUltimiBuffet(){
+		return this.buffetRepository.findTop3ByOrderByIdDesc();
+	}
+	
 	public boolean alreadyExists(Buffet b) {
 		return buffetRepository.existsByNomeAndDescrizione(b.getNome(), b.getDescrizione());
 	}

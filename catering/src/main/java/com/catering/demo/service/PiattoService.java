@@ -62,6 +62,11 @@ public class PiattoService {
 		return piatto.getIngredienti();
 	}
 	
+	//PER HOMEPAGE
+	public List<Piatto> getUltimiPiatti(){
+		return this.piattoRepository.findTop3ByOrderByIdDesc();
+	}
+	
 	public boolean alreadyExists(Piatto p) {
 		return piattoRepository.existsByNomeAndDescrizione(p.getNome(), 
 														   p.getDescrizione());

@@ -69,4 +69,9 @@ public class ChefService {
 		Chef c = this.chefRepository.findById(id).get();
 		return c.getBuffets();
 	}
+	
+	//PER HOMEPAGE
+	public List<Chef> getUltimiChef(){
+		return this.chefRepository.findTop3ByOrderByIdDesc();
+	}
 }
