@@ -4,15 +4,45 @@
 <body>
 	<header th:replace="fragments/layout.html :: navMenu"></header>
 	
-	<form th:action="@{/login}" method="post">
-		<div>Username:<br><input type="text" name="username" required></div>
-		
-		<div>Password:<br><input type="password" name="password" required></div>
-		
-		<div><button type="submit">Conferma</button></div>
-	</form>
-
-	<div th:replace="fragments/layout.html :: backButton(back='/')"></div>
+	  <section class="generic_section layout_padding">
+	    <div class="container">
+	      <div class="heading_container">
+	        <h2>Login</h2>
+	      </div>
+	      <div class="row">
+	        <div class="col-md-6">
+	          <div class="form_container">
+				<form th:action="@{/login}" method="post">
+					<div><input type="text" class="form-control" placeholder="Username" name="username" required></div>
+					
+					<div><input type="password" class="form-control" placeholder="Password" name="password" required></div>
+					
+					<div class="btn_box"><button type="submit">Conferma</button></div>
+				</form>
+	          </div>
+	          <br><br>
+			  <a class="btn btn-outline-success" style="margin: 10px 5px">
+			  	<img style="width: 25px; margin-right: 10px" src="/images/icon/icon-google.png">
+			  	Login With Google
+			  </a>
+			  <a class="btn btn-outline-info" style="margin: 10px 5px">
+			  	<img style="width: 23px; margin-right: 10px" src="/images/icon/icon-facebook.png">
+			  	Login With Facebook
+			  </a>
+			  <a class="btn btn-outline-dark" style="margin: 10px 5px">
+			  	<img style="width: 23px; margin-right: 10px" src="/images/icon/icon-github.png">
+			  	Login With GitHub
+			  </a>
+	        </div>
+	        <div class="col-md-6">
+	          <img style="width: 100%" src="/images/login-image.gif">
+	        </div>
+	      </div>
+	      
+	      <div th:replace="fragments/layout.html :: backButton(back='/')"></div>
+	    </div> <!-- end container -->
+	  </section>
+	  
 	<footer th:replace="fragments/layout.html :: fondo"></footer>
 	<div th:replace="fragments/layout.html :: jsFiles"></div>
 </body>

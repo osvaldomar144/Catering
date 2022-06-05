@@ -4,8 +4,17 @@
 <body>
 	<header th:replace="fragments/layout.html :: navMenu"></header>
 
-	<h2>Registrazione avvenuta con successo!</h2>
-
-	<footer th:replace="fragments/layout.html :: fondo(back='/')"></footer>
+	  <section class="generic_section layout_padding">
+	    <div class="container">
+		  <div class="alert alert-success" role="alert">
+		  	<h2>Registrazione avvenuta con successo!</h2>
+		  </div>
+		  <img style="width: 100%" src="/images/success-page-image.gif">
+	      <div th:replace="fragments/layout.html :: backButton(back='/')"></div>
+	    </div> <!-- end container -->
+	  </section>
+	
+	<footer th:replace="fragments/layout.html :: fondo"></footer>
+	<div th:replace="fragments/layout.html :: jsFiles"></div>
 </body>
 </html>

@@ -3,27 +3,45 @@
 <head th:replace="fragments/layout.html :: headerfiles(title='Register')"> </head>
 <body>
 	<header th:replace="fragments/layout.html :: navMenu"></header>
-
-	<h2>Register</h2>
-	<form th:action="@{/register}" method="post">
-	<div th:object="${user}">
-		<div>Nome:<br><input type="text" placeholeder="Nome" th:field="*{nome}"  required></div>
-		<div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" th:style="'color:red'"></div>
-		
-		<div>Cognome:<br><input type="text" placeholeder="Cognome" th:field="*{cognome}" required></div>
-		<div th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}" th:style="'color:red'"></div>
-	</div>
-	<div th:object="${credentials}">
-		<div>Username:<br><input type="text" placeholeder="Username" th:field="*{username}" required></div>
-		<div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" th:style="'color:red'"></div>
-		
-		<div>Password:<br><input type="password" placeholeder="Password" th:field="*{password}" required></div>
-		<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" th:style="'color:red'"></div>
-	</div>
-		
-		<div><button type="submit">Conferma</button></div>
-	</form>
 	
-	<footer th:replace="fragments/layout.html :: fondo(back='/')"></footer>
+	  <section class="generic_section layout_padding">
+	    <div class="container">
+	      <div class="heading_container">
+	        <h2>Register</h2>
+	      </div>
+	      <div class="row">
+	        <div class="col-md-6">
+	          <div class="form_container">
+				<form th:action="@{/register}" method="post">
+				<div th:object="${user}">
+					<div><input type="text" class="form-control" placeholder="Nome" th:field="*{nome}"  required></div>
+					<div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="alert alert-danger" role="alert"></div>
+					
+					<div><input type="text" class="form-control" placeholder="Cognome" th:field="*{cognome}" required></div>
+					<div th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}" class="alert alert-danger" role="alert"></div>
+				</div>
+				<div th:object="${credentials}">
+					<div><input type="text" class="form-control" placeholder="Username" th:field="*{username}" required></div>
+					<div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="alert alert-danger" role="alert"></div>
+					
+					<div><input type="password" class="form-control" placeholder="Password" th:field="*{password}" required></div>
+					<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger" role="alert"></div>
+				</div>
+					
+					<div class="btn_box"><button type="submit">Conferma</button></div>
+				</form>
+	          </div>
+	        </div>
+	        <div class="col-md-6">
+	          <img style="width: 100%" src="/images/register-image2.gif">
+	        </div>
+	      </div>
+	      
+	      <div th:replace="fragments/layout.html :: backButton(back='/')"></div>
+	    </div> <!-- end container -->
+	  </section>
+	
+	<footer th:replace="fragments/layout.html :: fondo"></footer>
+	<div th:replace="fragments/layout.html :: jsFiles"></div>
 </body>
 </html>
