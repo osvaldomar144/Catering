@@ -28,4 +28,9 @@ public class CateringController {
 		model.addAttribute("ultimiPiatti", this.piattoService.getUltimiPiatti());
 		return "homepage.html";
 	}
+	
+	@GetMapping("/admin")
+	public String adminPage(Model model) {
+		return "admin/dashboard";
+	}
 }
