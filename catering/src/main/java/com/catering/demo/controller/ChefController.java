@@ -41,6 +41,7 @@ public class ChefController {
 	@GetMapping("/chef/{id}")
 	public String getSingoloChef(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("chef", this.chefService.findById(id));
+		model.addAttribute("buffets", this.chefService.getBuffetsOfChef(id));
 		return DIR_PAGES_CHEF + "chef";
 	}
 	
@@ -102,17 +103,6 @@ public class ChefController {
 		this.chefService.delete(chef);		
 		return this.adminChefs(model);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 }

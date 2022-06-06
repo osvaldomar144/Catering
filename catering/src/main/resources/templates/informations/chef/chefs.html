@@ -4,35 +4,34 @@
 <body>
 	<header th:replace="fragments/layout.html :: navMenu"></header>
 
-	  <section class="boxInfo_section layout_padding">
-	    <div class="container">
-	      <div class="heading_container">
-	        <h2>Elenco Chefs</h2>
-	      </div>
-	      
-        <div class="row grid">
-          <div th:each="chef : ${chefs}" class="col-sm-6 col-lg-4 all">
-            <div class="box">
-              <div>
-                <div class="img-box">
-                  <img src="/images/chef.png" alt="">
-                </div>
-                <div class="detail-box">
-                  <h5>Chef</h5>
-                  <strong>Nome e Cognome:</strong>
-                  <p th:text="${chef.nome} + ' ' + ${chef.cognome}">Nome e Cognome Chef</p>
-                  <strong>Nazionalita:</strong>
-                  <p th:text="${chef.nazionalita}">Nazionalita</p>
-                  <p><a th:href="@{/chef/} + ${chef.id}" class="btn btn-sm">Dettagli</a></p>
-                </div>
-              </div>
-            </div>
-          </div>
-      </div>
-	      
-	      <div th:replace="fragments/layout.html :: backButton(back='/')"></div>
-	    </div> <!-- end container -->
-	  </section>
+	<section class="boxInfo_section layout_padding">
+		<div class="container">
+			<div class="heading_container">
+				<h2>Elenco Chefs</h2>
+			</div>
+			
+			<div class="row grid">
+				<div th:each="chef : ${chefs}" class="col-sm-6 col-lg-4 all">
+					<div class="box">
+						<div>
+							<div class="img-box">
+								<img src="/images/chef.png" alt="">
+							</div>
+							<div class="detail-box">
+								<strong>Nome e Cognome:</strong>
+								<p th:text="${chef.nome} + ' ' + ${chef.cognome}">Nome e Cognome Chef</p>
+								<strong>Nazionalita:</strong>
+								<p th:text="${chef.nazionalita}">Nazionalita</p>
+								<p><a th:href="@{/chef/} + ${chef.id}" class="btn btn-sm">Dettagli</a></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div th:replace="fragments/layout.html :: backButton(back='/')"></div>
+		</div> <!-- end container -->
+	</section>
 	
 	<footer th:replace="fragments/layout.html :: fondo"></footer>
 	<div th:replace="fragments/layout.html :: jsFiles"></div>

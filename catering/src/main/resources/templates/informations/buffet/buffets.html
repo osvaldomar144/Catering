@@ -4,16 +4,36 @@
 <body>
 	<header th:replace="fragments/layout.html :: navMenu"></header>
 
-	<h2>Elenco Buffets</h2>
-	<ul>
-		<li th:each="buffet : ${buffets}">
-			<a th:href="@{'/buffet/' + ${buffet.id}}" 
-			   th:text="${buffet.nome}">Paolo Rossi</a>
-			<p th:text="${buffet.descrizione}">Descrizione</p>
-		</li>
-	</ul>
-	<br>
+	  <section class="boxInfo_section layout_padding">
+	    <div class="container">
+	      <div class="heading_container">
+	        <h2>Elenco Buffets</h2>
+	      </div>
+	      
+        <div class="row grid">
+          <div th:each="buffet : ${buffets}" class="col-sm-6 col-lg-4 all">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="/images/buffet.png" alt="">
+                </div>
+                <div class="detail-box">
+                  <strong>Nome</strong>
+                  <p th:text="${buffet.nome}">Nome Buffet</p>
+                  <strong>Descrizione:</strong>
+                  <p th:text="${buffet.descrizione}">Nazionalita</p>
+                  <p><a th:href="@{/buffet/} + ${buffet.id}" class="btn btn-sm">Dettagli</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+	      
+	      <div th:replace="fragments/layout.html :: backButton(back='/')"></div>
+	    </div> <!-- end container -->
+	  </section>
 	
-	<footer th:replace="fragments/layout.html :: fondo(back='/')"></footer>
+	<footer th:replace="fragments/layout.html :: fondo"></footer>
+	<div th:replace="fragments/layout.html :: jsFiles"></div>
 </body>
 </html>

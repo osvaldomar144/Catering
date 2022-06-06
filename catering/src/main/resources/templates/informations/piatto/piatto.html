@@ -4,17 +4,55 @@
 <body>
 	<header th:replace="fragments/layout.html :: navMenu"></header>
 
-	<div th:object="${piatto}">
-		<h2 th:text="*{nome} + ' ' + *{descrizione}">Piatto</h2>
+	<section class="generic_section layout_padding">
+		<div class="container">
+			<div class="heading_container">
+				<h2>Dettagli Piatto</h2>
+			</div>
 
-		<h3>Elenco Ingredienti Piatto</h3>
-		<ul>
-			<li th:each="ingrediente : *{ingredienti}">
-				<p th:text="${ingrediente.nome}"></p>
-			</li>
-		</ul>
-	</div>
 
-	<footer th:replace="fragments/layout.html :: fondo(back='/piatti')"></footer>
+			<div class="row" th:object="${piatto}">
+				<div class="col col-md-4">
+					<img style="width: 65%;" class="rounded-circle" src="/images/profile-image-chef.png">
+				</div>
+				<div class="col col-md-8">
+					<h3>Nome:</h3>
+					<p th:text="*{nome}"></p>
+					<h3>Descrizione:</h3>
+					<p th:text="*{descrizione}"></p>
+				</div>
+			</div>
+
+
+			<div class="boxInfo_section layout_padding">
+				<div class="heading_container">
+					<h2>Ingredienti del Piatto</h2><br>
+				</div>
+
+				<div class="row grid">
+					<div th:each="ingrediente : ${ingredienti}" class="col-sm-6 col-lg-4 all">
+						<div class="box">
+							<div>
+								<div class="img-box">
+									<img src="/images/ingrediente.png" alt="">
+								</div>
+								<div class="detail-box">
+									<strong>Nome:</strong>
+									<p th:text="${ingrediente.nome}">Nome Ingrediente</p>
+									<strong>Descrizione:</strong>
+									<p th:text="${ingrediente.descrizione}">Descrizione</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			
+		</div> <!-- end container -->
+	</section>
+	
+	<footer th:replace="fragments/layout.html :: fondo"></footer>
+	<div th:replace="fragments/layout.html :: jsFiles"></div>
 </body>
 </html>

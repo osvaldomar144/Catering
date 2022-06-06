@@ -3,19 +3,60 @@
 <head th:replace="fragments/layout.html :: headerfiles(title='Informazioni Chef')"> </head>
 <body>
 	<header th:replace="fragments/layout.html :: navMenu"></header>
+	
+	<section class="generic_section layout_padding">
+		<div class="container">
+			<div class="heading_container">
+				<h2>Dettagli Chef</h2>
+			</div>
 
-	<div th:object="${chef}">
-		<h2 th:text="*{nome} + ' ' + *{cognome} + ' ' + *{nazionalita}">Chef</h2>
 
-		<h3>Elenco Buffets Proposti dallo Chef</h3>
-		<ul>
-			<li th:each="buffet : *{buffets}">
-				<a th:href="@{'/buffet/' + ${buffet.id}}" 
-				   th:text="${buffet.nome} + ' ' + ${buffet.descrizione}">Buffet</a>
-			</li>
-		</ul>
-	</div>
+			<div class="row" th:object="${chef}">
+				<div class="col col-md-4">
+					<img style="width: 65%;" class="rounded-circle" src="/images/profile-image-chef.png">
+				</div>
+				<div class="col col-md-8">
+					<h3>Nome:</h3>
+					<p th:text="*{nome}"></p>
+					<h3>Cognome:</h3>
+					<p th:text="*{cognome}"></p>
+					<h3>Nazionalità:</h3>
+					<p th:text="*{nazionalita}"></p>
+				</div>
+			</div>
 
-	<footer th:replace="fragments/layout.html :: fondo(back='/chefs')"></footer>
+
+			<div class="boxInfo_section layout_padding">
+				<div class="heading_container">
+					<h2>Buffet Proposti dallo Chef</h2><br>
+				</div>
+
+				<div class="row grid">
+					<div th:each="buffet : ${buffets}" class="col-sm-6 col-lg-4 all">
+						<div class="box">
+							<div>
+								<div class="img-box">
+									<img src="/images/buffet.png" alt="">
+								</div>
+								<div class="detail-box">
+									<strong>Nome:</strong>
+									<p th:text="${buffet.nome}">Nome Buffet</p>
+									<strong>Descrizione:</strong>
+									<p th:text="${buffet.descrizione}">Descrizione</p>
+									<p><a th:href="@{/buffet/} + ${buffet.id}" class="btn btn-sm">Dettagli</a></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			
+			<div th:replace="fragments/layout.html :: backButton(back='/chefs')"></div>
+		</div> <!-- end container -->
+	</section>
+	
+	<footer th:replace="fragments/layout.html :: fondo"></footer>
+	<div th:replace="fragments/layout.html :: jsFiles"></div>
 </body>
 </html>
