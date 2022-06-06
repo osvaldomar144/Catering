@@ -474,35 +474,17 @@ a:focus {
   margin-top: 10px;
 }
 
-.boxInfo_section .box .options {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-}
-
-.boxInfo_section .box .options a {
-  width: 40px;
-  height: 40px;
-  border-radius: 100%;
+.boxInfo_section .box .detail-box a {
+  width: auto;
+  margin-top: 10px;
+  border-radius: 10px;
   background: #ffbe33;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  color: #fff;
 }
 
-.boxInfo_section .box .options a svg {
-  width: 18px;
-  height: auto;
-  fill: #ffffff;
+.boxInfo_section .box .detail-box a:hover {
+	color: #111;
+	opacity: .8;
 }
 
 .boxInfo_section .box:hover .img-box img {
