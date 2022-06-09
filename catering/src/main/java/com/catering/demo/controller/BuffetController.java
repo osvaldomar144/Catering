@@ -97,6 +97,7 @@ public class BuffetController {
 			return "redirect:/" + DIR_ADMIN_PAGES_CHEF + "modificaChef/" + idChef;
 		}
 		buffet.setChef(chefService.findById(idChef));
+		model.addAttribute("piatti", this.buffetService.getPiattiOfBuffet(buffet.getId()));
 		return DIR_ADMIN_PAGES_BUFFET + "modificaBuffet";
 	}
 	

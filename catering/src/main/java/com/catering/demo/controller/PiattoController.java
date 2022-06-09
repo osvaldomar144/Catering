@@ -97,6 +97,7 @@ public class PiattoController {
 			return "redirect:/" + DIR_ADMIN_PAGES_BUFFET + "modificaBuffet/" + idBuffet;
 		}
 		piatto.setBuffet(buffetService.findById(idBuffet));
+		model.addAttribute("ingredienti", this.piattoService.getIngredientiOfPiatto(piatto.getId()));
 		return DIR_ADMIN_PAGES_PIATTO + "modificaPiatto";
 	}
 	

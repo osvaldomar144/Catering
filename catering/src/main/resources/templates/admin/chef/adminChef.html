@@ -1,22 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/layout.html :: headerfiles(title='Admin Chefs')"> </head>
-<body class="sub_page">
+<body>
 	<header th:replace="fragments/layout.html :: navMenu"></header>
 
-	<h2>Elenco Chefs - Admin</h2>
-	<a th:href="@{/admin/chef/aggiungiChef}">Aggiungi Nuovo Chef</a>
-	<br>
-	<ul>
-		<li th:each="chef : ${chefs}">
-			<span th:text="${chef.nome} + ' ' + ${chef.cognome} + ' '">Paolo Rossi </span>
-		    <a th:href="@{'/admin/chef/modificaChef/' + ${chef.id}}">Modifica</a>
-			<a th:href="@{'/admin/chef/delete/' + ${chef.id}}">Delete</a>
-		</li>
-	</ul>
-	<br>
-	
-	<footer th:replace="fragments/layout.html :: fondo(back='/')"></footer>
+	<section class="generic_section layout_padding">
+		<div class="container">
+			<div class="heading_container">
+				<h2>Elenco Chefs Presenti nel Sistema - Admin</h2>
+			</div>
+
+			<a class="btn btn-success btn-lg" th:href="@{/admin/chef/aggiungiChef}">Aggiungi Nuovo Chef</a>
+			<br><br>
+			<div class="table-responsive">
+				<table class="table table-striped table-hover">
+					<thead class="thead-dark">
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Nome</th>
+							<th scope="col">Cognome</th>
+							<th scope="col">Nazionalità</th>
+							<th scope="col"></th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="chef : ${chefs}">
+							<th scope="row" th:text="${chef.id}">1</th>
+							<th th:text="${chef.nome}">Nome</th>
+							<th th:text="${chef.cognome}">Cognome</th>
+							<th th:text="${chef.nazionalita}">Nazionalità</th>
+							<th><a class="btn btn-success" th:href="@{'/admin/chef/modificaChef/' + ${chef.id}}">Modifica</a></th>
+							<th><a class="btn btn-danger" th:href="@{'/admin/chef/delete/' + ${chef.id}}">Delete</a></th>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<br>
+
+		</div> <!-- end container -->
+	</section>
+
+	<footer th:replace="fragments/layout.html :: fondo"></footer>
 	<div th:replace="fragments/layout.html :: jsFiles"></div>
 </body>
 </html>
