@@ -11,26 +11,6 @@ body {
   padding: 90px 0;
 }
 
-.layout_padding2 {
-  padding: 75px 0;
-}
-
-.layout_padding2-top {
-  padding-top: 75px;
-}
-
-.layout_padding2-bottom {
-  padding-bottom: 75px;
-}
-
-.layout_padding-top {
-  padding-top: 90px;
-}
-
-.layout_padding-bottom {
-  padding-bottom: 90px;
-}
-
 h1,
 h2 {
   font-family: 'Dancing Script', cursive;
@@ -181,19 +161,6 @@ a:focus {
   color: #ffbe33;
 }
 
-.custom_nav-container .nav_search-btn {
-  width: auto;
-  height: auto;
-  padding: 0;
-  border: none;
-  color: #ffffff;
-  margin: 0 10px;
-}
-
-.custom_nav-container .nav_search-btn:hover {
-  color: #ffbe33;
-}
-
 .user_option {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -225,17 +192,6 @@ a:focus {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-}
-
-.user_option .cart_link svg {
-  width: 17px;
-  height: auto;
-  fill: #ffffff;
-  margin-bottom: 2px;
-}
-
-.user_option .cart_link:hover svg {
-  fill: #ffbe33;
 }
 
 .user_option .order_online {
@@ -727,17 +683,17 @@ a:focus {
 	color: #fff
 }
 
-.chef {
+.admin-box .chef {
 	cursor: pointer;
 	background-image: linear-gradient(-45deg, #fb0054 0%, #f55b2a 100%)
 }
 
-.buffet {
+.admin-box .buffet {
 	cursor: pointer;
 	background-image: linear-gradient(-45deg, #d5c10c 0%, #ff5722 100%)
 }
 
-.piatto {
+.admin-box .piatto {
 	cursor: pointer;
 	background-image: linear-gradient(45deg, #222831, #353232bd 100%)
 }
