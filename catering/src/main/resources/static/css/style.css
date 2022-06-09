@@ -684,4 +684,60 @@ a:focus {
 .footer_section .footer-info p a {
   color: inherit;
 }
-/*# sourceMappingURL=style.css.map */
+
+/* box admin */
+.admin-box {
+	position: relative;
+	width: 100%;
+	padding-right: 15px;
+	padding-left: 15px
+}
+
+.contenuto-box {
+	margin-top: 75px;
+	padding-bottom: 30px;
+	padding: 0 60px;
+	min-height: 200px;
+	text-align: center;
+	border-radius: 10px;
+	background-color: #fff;
+	transition: all .4s ease-in-out;
+	box-shadow: 0 0 25px 0 rgba(17, 17, 17, .5);
+}
+
+.contenuto-box .icon {
+	margin-bottom: -21px;
+	transform: translateY(-50%);
+	text-align: center
+}
+
+.contenuto-box img {
+	width: 100px;
+	padding: 5px;
+	border: 3px solid #fff;
+	background: #d0cdcd;
+	border-radius: 50%;
+}
+
+.contenuto-box .btn {
+	margin-bottom: 20px;
+}
+
+.contenuto-box h4, p {
+	color: #fff
+}
+
+.chef {
+	cursor: pointer;
+	background-image: linear-gradient(-45deg, #fb0054 0%, #f55b2a 100%)
+}
+
+.buffet {
+	cursor: pointer;
+	background-image: linear-gradient(-45deg, #d5c10c 0%, #ff5722 100%)
+}
+
+.piatto {
+	cursor: pointer;
+	background-image: linear-gradient(45deg, #222831, #353232bd 100%)
+}
