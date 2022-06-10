@@ -1,36 +1,67 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/layout.html :: headerfiles(title='Modifica Buffet')"> </head>
+<head th:replace="fragments/layout.html :: headerfiles(title='Modifica Piatto')"> </head>
 <body>
 	<header th:replace="fragments/layout.html :: navMenu"></header>
 
-	<h2>Modifica Piatto for Buffet <strong th:text="${piatto.buffet.nome}"></strong></h2>
-	<a th:href="@{/admin/ingrediente/aggiungiIngrediente/} + ${piatto.id}">Aggiungi Ingrediente</a>
-	<br>
+	<section class="generic_section layout_padding">
+		<div class="container">
+			<div class="heading_container">
+				<h2>Modifica il Piatto "<strong th:text="${piatto.nome}"></strong>" del Buffet <strong th:text="${piatto.buffet.nome}"></strong></h2>
+			</div>
 
-	<form th:action="@{/admin/piatto/modificaPiatto/} + *{buffet.id} +'/'+ *{id}" method="post" th:object="${piatto}">
-		<div th:if="${#fields.hasGlobalErrors()}">
-			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
-		</div>
-		<div>Nome:<br><input type="text" th:field="*{nome}"></div>
-		<div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
-		<br>
-		<div>Descrizione:<br><input type="text" th:field="*{descrizione}"></div>
-		<div th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></div>
-		<br>
+			<a class="btn btn-success btn-lg" 
+			   th:href="@{/admin/ingrediente/aggiungiIngrediente/} + ${piatto.id}">Aggiungi Nuovo Ingrediente
+			</a>
+			<br><br>
 
-		<ul>
-			<li th:each="ingrediente : ${ingredienti}">
-				<span th:text="${ingrediente.nome}">Nome Ingrediente</span>
-				<a th:href="@{/admin/ingrediente/modificaIngrediente/} + ${piatto.id} + '/' + ${ingrediente.id}"> Modifica</a>
-				<a th:href="@{/admin/ingrediente/delete/} + ${piatto.id} + '/' + ${ingrediente.id}"> Delete</a>
-			</li>
-		</ul>
 
-		<div><button type="submit">Modifica</button></div>
-	</form>
-	<br>
-	
-	<footer th:replace="fragments/layout.html :: fondo(back='/admin/buffet/modificaBuffet/' + ${piatto.buffet.id})"></footer>
+			<div class="form_container">
+				<form th:action="@{/admin/piatto/modificaPiatto/} + *{buffet.id} +'/'+ *{id}" method="post" th:object="${piatto}">
+					<div th:if="${#fields.hasGlobalErrors()}" class="alert alert-danger" role="alert">
+						<h4 align="center" th:each="err : ${#fields.globalErrors()}" th:text="'Errore: ' + ${err}">...</h4>
+					</div>
+					<div>Nome:<br><input type="text" class="form-control" placeholder="Nome" th:field="*{nome}"></div>
+					<div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="alert alert-danger" role="alert"></div>
+					
+					<div>Descrizione:<br><input type="text" class="form-control" placeholder="descrizione" th:field="*{descrizione}"></div>
+					<div th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}" class="alert alert-danger" role="alert"></div>
+
+					<div class="btn_box"><button type="submit">Modifica</button></div>
+				</form>
+			</div>
+			<br><br>
+			<h3>Elenco Ingredienti del Piatto</h3><br>
+			<div class="table-responsive">
+				<table class="table table-striped table-hover">
+					<thead class="thead-dark">
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Nome</th>
+							<th scope="col">Origine</th>
+							<th scope="col">Descrizione</th>
+							<th scope="col"></th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="ingrediente : ${ingredienti}">
+							<th scope="row" th:text="${ingrediente.id}">1</th>
+							<th th:text="${ingrediente.nome}">Nome</th>
+							<th th:text="${ingrediente.origine}">Origine</th>
+							<th th:text="${ingrediente.descrizione}">Descrizione</th>
+							<th><a class="btn btn-success" th:href="@{/admin/ingrediente/modificaIngrediente/} + ${piatto.id} + '/' + ${ingrediente.id}">Modifica</a></th>
+							<th><a class="btn btn-danger" th:href="@{/admin/ingrediente/delete/} + ${piatto.id} + '/' + ${ingrediente.id}">Delete</a></th>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<br>
+
+		</div> <!-- end container -->
+	</section>
+
+	<footer th:replace="fragments/layout.html :: fondo"></footer>
+	<div th:replace="fragments/layout.html :: jsFiles"></div>
 </body>
 </html>

@@ -4,26 +4,37 @@
 <body>
 	<header th:replace="fragments/layout.html :: navMenu"></header>
 
-	<h2>Modifica Ingrediente</h2>
+	<section class="generic_section layout_padding">
+		<div class="container">
+			<div class="heading_container">
+				<h2>Modifica Ingrediente</h2>
+			</div>
+			<br>
 
-	<form th:action="@{/admin/ingrediente/modificaIngrediente/} + ${idPiatto} +'/'+ *{id}" method="post" th:object="${ingrediente}">
-		<div th:if="${#fields.hasGlobalErrors()}">
-			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
-		</div>
-		<div>Nome:<br><input type="text" th:field="*{nome}"></div>
-		<div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
-		<br>
-		<div>Origine:<br><input type="text" th:field="*{origine}"></div>
-		<div th:if="${#fields.hasErrors('origine')}" th:errors="*{origine}"></div>
-		<br>
-		<div>Descrizione:<br><input type="text" th:field="*{descrizione}"></div>
-		<div th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></div>
-		<br>
 
-		<div><button type="submit">Modifica</button></div>
-	</form>
-	<br>
-	
-	<footer th:replace="fragments/layout.html :: fondo(back='/admin/piatto/modificaPiatto/' + ${idPiatto})"></footer>
+			<div class="form_container">
+				<form th:action="@{/admin/ingrediente/modificaIngrediente/} + ${idPiatto} +'/'+ *{id}" method="post" th:object="${ingrediente}">
+					<div th:if="${#fields.hasGlobalErrors()}" class="alert alert-danger" role="alert">
+						<h4 align="center" th:each="err : ${#fields.globalErrors()}" th:text="'Errore: ' + ${err}">...</h4>
+					</div>
+					<div>Nome:<br><input type="text" class="form-control" placeholder="Nome" th:field="*{nome}"></div>
+					<div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="alert alert-danger" role="alert"></div>
+
+					<div>Origine:<br><input type="text" class="form-control" placeholder="Origine" th:field="*{origine}"></div>
+					<div th:if="${#fields.hasErrors('origine')}" th:errors="*{origine}" class="alert alert-danger" role="alert"></div>
+					
+					<div>Descrizione:<br><input type="text" class="form-control" placeholder="descrizione" th:field="*{descrizione}"></div>
+					<div th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}" class="alert alert-danger" role="alert"></div>
+
+					<div class="btn_box"><button type="submit">Modifica</button></div>
+				</form>
+			</div>
+			<br>
+
+		</div> <!-- end container -->
+	</section>
+
+	<footer th:replace="fragments/layout.html :: fondo"></footer>
+	<div th:replace="fragments/layout.html :: jsFiles"></div>
 </body>
 </html>

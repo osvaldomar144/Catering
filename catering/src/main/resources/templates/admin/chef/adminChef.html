@@ -22,6 +22,7 @@
 							<th scope="col">Nazionalità</th>
 							<th scope="col"></th>
 							<th scope="col"></th>
+							<th scope="col"></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -30,6 +31,7 @@
 							<th th:text="${chef.nome}">Nome</th>
 							<th th:text="${chef.cognome}">Cognome</th>
 							<th th:text="${chef.nazionalita}">Nazionalità</th>
+							<th><a class="btn btn-info" th:href="@{'/admin/buffet/aggiungiBuffet/' + ${chef.id}}">Aggiungi Buffet</a></th>
 							<th><a class="btn btn-success" th:href="@{'/admin/chef/modificaChef/' + ${chef.id}}">Modifica</a></th>
 							<th><a class="btn btn-danger" th:href="@{'/admin/chef/delete/' + ${chef.id}}">Delete</a></th>
 						</tr>

@@ -77,6 +77,12 @@ public class BuffetController {
 	}
 	
 	// -- MODIFICA -- //
+	@GetMapping("/admin/buffet")
+	public String elencoBuffet(Model model) {
+		model.addAttribute("buffets", this.buffetService.findAll());
+		return DIR_ADMIN_PAGES_BUFFET + "adminBuffet";
+	}
+	
 	@GetMapping("/admin/buffet/modificaBuffet/{id}")
 	public String selezionaBuffet(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("buffet", this.buffetService.findById(id));

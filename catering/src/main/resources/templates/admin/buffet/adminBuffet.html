@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout.html :: headerfiles(title='Admin Buffets')"> </head>
+<body>
+	<header th:replace="fragments/layout.html :: navMenu"></header>
+
+	<section class="generic_section layout_padding">
+		<div class="container">
+			<div class="heading_container">
+				<h2>Elenco Buffets Presenti nel Sistema - Admin</h2>
+			</div>
+
+			<br>
+			<div class="table-responsive">
+				<table class="table table-striped table-hover">
+					<thead class="thead-dark">
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Nome</th>
+							<th scope="col">Descrizione</th>
+							<th scope="col">Chef</th>
+							<th scope="col"></th>
+							<th scope="col"></th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="buffet : ${buffets}">
+							<th scope="row" th:text="${buffet.id}">1</th>
+							<th th:text="${buffet.nome}">Nome</th>
+							<th th:text="${buffet.descrizione}">Cognome</th>
+							<th th:text="${buffet.chef.nome}">Nome Chef</th>
+							<th><a class="btn btn-info" th:href="@{'/admin/piatto/aggiungiPiatto/' + ${buffet.id}}">Aggiungi Piatto</a></th>
+							<th><a class="btn btn-success" th:href="@{/admin/buffet/modificaBuffet/} + ${buffet.id}">Modifica</a></th>
+							<th><a class="btn btn-danger" th:href="@{/admin/buffet/delete/} + ${buffet.chef.id} + '/' + ${buffet.id}">Delete</a></th>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<br>
+
+		</div> <!-- end container -->
+	</section>
+
+	<footer th:replace="fragments/layout.html :: fondo"></footer>
+	<div th:replace="fragments/layout.html :: jsFiles"></div>
+</body>
+</html>

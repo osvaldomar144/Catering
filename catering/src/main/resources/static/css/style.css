@@ -679,7 +679,7 @@ a:focus {
 	margin-bottom: 20px;
 }
 
-.contenuto-box h4, p {
+.admin-box .contenuto-box h4 p {
 	color: #fff
 }
 
