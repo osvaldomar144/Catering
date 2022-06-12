@@ -3,24 +3,22 @@
 <head th:replace="fragments/layout.html :: headerfiles(title='Informazioni Buffet')"> </head>
 <body>
 	<header th:replace="fragments/layout.html :: navMenu"></header>
+
+
+	<section class="buffet-background informations-section ">
+		<div class="img-profile-informations" >
+			<img src="/images/profile-image-chef.png" alt="Profile Buffet">
+		</div>
+	</section>
 	
 	<section class="generic_section layout_padding">
 		<div class="container">
-			<div class="heading_container">
-				<h2>Dettagli Buffet</h2>
-			</div>
-
-
-			<div class="row" th:object="${buffet}">
-				<div class="col col-md-4">
-					<img style="width: 65%;" class="rounded-circle" src="/images/profile-image-chef.png">
+			<div class="card-informations" th:object="${buffet}">
+				<div>
+					<strong>Nome Buffet: </strong><span th:text="*{nome}"></span><br>
+					<strong>Descrizione: </strong><span th:text="*{descrizione}"></span><br>
 				</div>
-				<div class="col col-md-8">
-					<h3>Nome:</h3>
-					<p th:text="*{nome}"></p>
-					<h3>Descrizione:</h3>
-					<p th:text="*{descrizione}"></p>
-				</div>
+
 			</div>
 
 

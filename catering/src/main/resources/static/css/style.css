@@ -697,3 +697,53 @@ a:focus {
 	cursor: pointer;
 	background-image: linear-gradient(45deg, #222831, #353232bd 100%)
 }
+
+/****** PRESENTAZIONE INFORMAZIONI ******/
+.informations-section {
+	height: 380px;
+}
+
+.chef-background {
+	background: url("/images/chef/backgrounds/background-profile-chef.jpeg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position-y: center;
+}
+
+.buffet-background {
+	background: url("/images/buffet/backgrounds/buffet-profile-background.jpeg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position-y: center;	
+}
+
+.piatto-background {
+	background: url("/images/piatto/backgrounds/piatto-profile-background.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position-y: center;
+}
+
+.img-profile-informations {
+	width: 100%;
+	padding: 1.5em 0.5em 0.5em;
+	text-align: center;
+}
+
+.card-informations {
+	font-size: 24px;
+}
+
+.card-informations strong {
+	font-family: 'Dancing Script', cursive;
+	font-size: 30px;
+}
+
+.img-profile-informations img {
+	width: 310px;
+	margin-top: 14% !important;
+	border: 4px solid #fff;
+	border-radius: 50%;
+	/*margin: 0 auto;*/
+	box-shadow: 0 0 10px rgb(0 0 0/ 70%);
+}

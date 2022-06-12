@@ -4,60 +4,23 @@
 <body>
 	<header th:replace="fragments/layout.html :: navMenu"></header>
 	
-
-<style>
-	.card-informations {
-	width: 100%;
-  margin-top: 2em;
-  padding: 1.5em 0.5em 0.5em;
-  border-radius: 2em;
-  text-align: center;
-  background: linear-gradient(45deg, #e69c00 50%, #ffe500);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  font-size: 22px;
-  width: 100%;
-}
-
-.card-informations strong {
-	font-family: 'Dancing Script', cursive;
-	font-size: 30px;
-}
-
-.card-informations img {
-  width: 200px;
-  margin-top: -11% !important;
-  border:  2px solid #fff;
-  border-radius: 50%;
-  margin: 0 auto;
-  box-shadow: 0 0 10px rgb(0 0 0 / 20%);
-}
-
-</style>
-
+	<section class="chef-background informations-section ">
+		<div class="img-profile-informations" >
+			<img src="/images/profile-image-chef.png" alt="Profile Chef">
+		</div>
+	</section>
 
 	<section class="generic_section layout_padding">
 		<div class="container">
-			<div class="heading_container">
-				<h2>Dettagli Chef</h2>
-			</div>
 
-
-			<div th:object="${chef}">
-
-				<div class="card-informations">
-					<img src="/images/profile-image-chef.png" class="card-img-top" alt="Profile Chef">
-					<div class="card-body">
-						<div>
-							<strong>Nome: </strong><span th:text="*{nome}"></span><br>
-							<strong>Cognome: </strong><span th:text="*{cognome}"></span><br>
-							<strong>Nazionalità: </strong><span th:text="*{nazionalita}"></span><br>
-						</div>
-
-					</div>
+			<div class="card-informations" th:object="${chef}">
+				<div>
+					<strong>Nome: </strong><span th:text="*{nome}"></span><br>
+					<strong>Cognome: </strong><span th:text="*{cognome}"></span><br>
+					<strong>Nazionalità: </strong><span th:text="*{nazionalita}"></span><br>
 				</div>
 
 			</div>
-
 
 			<div class="boxInfo_section layout_padding">
 				<div class="heading_container">
