@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,12 +19,16 @@ import com.catering.demo.controller.validator.UserValidator;
 import com.catering.demo.model.Credentials;
 import com.catering.demo.model.User;
 import com.catering.demo.service.CredentialsService;
+import com.catering.demo.service.UserService;
 
 @Controller
 public class AuthenticationController {
 
 	@Autowired
 	private CredentialsService credentialsService;
+	
+	@Autowired
+	private UserService userService;
 	
 	@Autowired
 	private UserValidator userValidator;
@@ -71,6 +76,7 @@ public class AuthenticationController {
         this.credentialsValidator.validate(credentials, credentialsBindingResult);
 
 		if(!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
+			user.setImg("icon-user-default.png");
 			credentials.setUser(user);
 			credentialsService.saveCredentials(credentials);
 			return "Authentication/registrationSuccessful";
@@ -80,6 +86,15 @@ public class AuthenticationController {
 	}
 	
 	/* PROFILE */
+	@GetMapping("/profile")
+	public String profileUser(Model model) {
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+		User user = userService.getUser(credentials.getUser().getId());
+		model.addAttribute("user", user);
+		model.addAttribute("credentials", credentials);
+		return "Authentication/profile";
+	}
 	
 	
 }

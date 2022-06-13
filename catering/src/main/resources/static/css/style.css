@@ -724,6 +724,13 @@ a:focus {
 	background-position-y: center;
 }
 
+.user-background {
+	background: url("/images/user/background/profile-background.jpeg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position-y: center;
+}
+
 .img-profile-informations {
 	width: 100%;
 	padding: 1.5em 0.5em 0.5em;
@@ -745,5 +752,34 @@ a:focus {
 	border: 4px solid #fff;
 	border-radius: 50%;
 	/*margin: 0 auto;*/
+	background: #febf33;
 	box-shadow: 0 0 10px rgb(0 0 0/ 70%);
+}
+
+/****** PAGE PROFILE ******/
+.margin-info-profile {
+	margin-top: 8%;
+}
+
+.logout-hover:hover{
+	background-color: #dc3545;
+	color: #fff;
+}
+
+.list-group-item {
+	padding: 2rem 1.5rem;
+	font-family: 'Dancing Script';
+	font-size: 30px;
+	border: 2px solid #febf33;
+}
+
+.list-group-item.active {
+	background-color: #e69c00;
+	border-color: #febf33;
+}
+
+.tab-pane {
+	padding: 5% 8%;
+	border-radius: 10px;
+	background: rgba(17, 17, 17, 0.1);
 }
