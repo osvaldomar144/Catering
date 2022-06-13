@@ -1,5 +1,6 @@
 package com.catering.demo.controller;
 
+import static com.catering.demo.model.Ingrediente.DIR_FOLDER_IMG;
 import static com.catering.demo.model.Ingrediente.DIR_ADMIN_PAGES_INGREDIENTE;
 import static com.catering.demo.model.Ingrediente.DIR_PAGES_INGREDIENTE;
 import static com.catering.demo.model.Piatto.DIR_ADMIN_PAGES_PIATTO;
@@ -16,11 +17,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.catering.demo.model.Ingrediente;
 import com.catering.demo.model.Piatto;
 import com.catering.demo.service.IngredienteService;
 import com.catering.demo.service.PiattoService;
+import com.catering.demo.utility.FileStore;
 
 @Controller
 public class IngredienteController {
@@ -61,12 +65,14 @@ public class IngredienteController {
 
 	@PostMapping("/admin/ingrediente/aggiungiIngrediente/{idPiatto}")
 	public String addIngredienteToPiatto(@Valid @ModelAttribute("ingrediente") Ingrediente ingrediente,
-									@PathVariable("idPiatto") Long idPiatto,
-									BindingResult bindingResult,
-									Model model) {
+										@PathVariable("idPiatto") Long idPiatto,
+										@RequestParam("file") MultipartFile file,
+										BindingResult bindingResult,
+										Model model) {
 
 		//this.ingredienteValidator.validate(ingrediente, bindingResult);
 		if(!bindingResult.hasErrors()) {
+			ingrediente.setImg(FileStore.store(file, DIR_FOLDER_IMG));
 			this.piattoService.addIngrediente(idPiatto, ingrediente);
 			return "redirect:/" + DIR_ADMIN_PAGES_PIATTO + "modificaPiatto/" + idPiatto;
 		}
@@ -107,6 +113,7 @@ public class IngredienteController {
 							   Model model) {
 		Ingrediente ingrediente = this.ingredienteService.findById(idIngrediente);
 		Piatto piatto = this.piattoService.findById(idPiatto);
+		FileStore.removeImg(DIR_FOLDER_IMG, ingrediente.getImg());
 		piatto.getIngredienti().remove(ingrediente);
 		this.ingredienteService.delete(ingrediente);
 		this.piattoService.save(piatto);

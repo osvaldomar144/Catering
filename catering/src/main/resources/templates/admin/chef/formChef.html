@@ -12,7 +12,7 @@
 
 
 			<div class="form_container">
-				<form th:action="@{/admin/chef/aggiungiChef}" method="post" th:object="${chef}">
+				<form th:action="@{/admin/chef/aggiungiChef}" method="post" th:object="${chef}" enctype="multipart/form-data">
 					<div th:if="${#fields.hasGlobalErrors()}" class="alert alert-danger" role="alert">
 						<h4 align="center" th:each="err : ${#fields.globalErrors()}" th:text="'Errore: ' + ${err}">...</h4>
 					</div>
@@ -24,6 +24,8 @@
 
 					<div><input type="text" class="form-control" placeholder="Nazionalità" th:field="*{nazionalita}" required></div>
 					<div th:if="${#fields.hasErrors('nazionalita')}" th:errors="*{nazionalita}" class="alert alert-danger" role="alert"></div>
+
+					<div><input type="file" class="form-control-file" name="file"></div>
 					<div class="btn_box"><button type="submit">Aggiungi</button></div>
 				</form>
 			</div>

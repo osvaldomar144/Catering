@@ -12,6 +12,8 @@ public class Ingrediente {
 	public static final String DIR_PAGES_INGREDIENTE = "informations/ingrediente/";
 	public static final String DIR_ADMIN_PAGES_INGREDIENTE = "admin/ingrediente/";
 	
+	public static final String DIR_FOLDER_IMG = "ingrediente/profili";
+	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -24,6 +26,7 @@ public class Ingrediente {
 	
 	private String descrizione;
 
+	private String img;
 	
 	/* methods */
 	public Long getId() {
@@ -56,5 +59,13 @@ public class Ingrediente {
 
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 }

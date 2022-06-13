@@ -2,6 +2,7 @@ package com.catering.demo.controller;
 
 import static com.catering.demo.model.Chef.DIR_ADMIN_PAGES_CHEF;
 import static com.catering.demo.model.Chef.DIR_PAGES_CHEF;
+import static com.catering.demo.model.Chef.DIR_FOLDER_IMG;
 
 import java.util.List;
 
@@ -15,10 +16,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.catering.demo.controller.validator.ChefValidator;
 import com.catering.demo.model.Chef;
 import com.catering.demo.service.ChefService;
+import com.catering.demo.utility.FileStore;
 
 @Controller
 public class ChefController {
@@ -63,10 +67,13 @@ public class ChefController {
 	}
 	
 	@PostMapping("/admin/chef/aggiungiChef")
-	public String aggiungiChef(@Valid @ModelAttribute("chef") Chef chef, BindingResult bindingResult,
+	public String aggiungiChef(@Valid @ModelAttribute("chef") Chef chef, 
+			 				   @RequestParam("file") MultipartFile file,
+			 				   BindingResult bindingResult,
 							   Model model) {
 		this.chefValidator.validate(chef, bindingResult);	
 		if(!bindingResult.hasErrors()) {
+			chef.setImg(FileStore.store(file, DIR_FOLDER_IMG));
 			this.chefService.save(chef);
 			return this.adminChefs(model);
 		}
@@ -100,6 +107,7 @@ public class ChefController {
 	@GetMapping("/admin/chef/delete/{id}")
 	public String deleteChef(@PathVariable("id") Long id,  Model model) {
 		Chef chef = this.chefService.findById(id);
+		FileStore.removeImg(DIR_FOLDER_IMG, chef.getImg());
 		this.chefService.delete(chef);		
 		return this.adminChefs(model);
 	}

@@ -3,6 +3,7 @@ package com.catering.demo.controller;
 import static com.catering.demo.model.Buffet.DIR_ADMIN_PAGES_BUFFET;
 import static com.catering.demo.model.Buffet.DIR_PAGES_BUFFET;
 import static com.catering.demo.model.Chef.DIR_ADMIN_PAGES_CHEF;
+import static com.catering.demo.model.Buffet.DIR_FOLDER_IMG;
 
 import java.util.List;
 
@@ -16,12 +17,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.catering.demo.controller.validator.BuffetValidator;
 import com.catering.demo.model.Buffet;
 import com.catering.demo.model.Chef;
 import com.catering.demo.service.BuffetService;
 import com.catering.demo.service.ChefService;
+import com.catering.demo.utility.FileStore;
 
 @Controller
 public class BuffetController {
@@ -64,11 +68,13 @@ public class BuffetController {
 	@PostMapping("/admin/buffet/aggiungiBuffet/{idChef}")
 	public String addBuffetToChef(@Valid @ModelAttribute("buffet") Buffet buffet, 
 								  @PathVariable("idChef") Long idChef,
+								  @RequestParam("file") MultipartFile file,
 			   					  BindingResult bindingResult,
 			   					  Model model) {
 
 		this.buffetValidator.validate(buffet, bindingResult);
 		if(!bindingResult.hasErrors()) {
+			buffet.setImg(FileStore.store(file, DIR_FOLDER_IMG));
 			this.chefService.addBuffet(idChef, buffet);
 			return "redirect:/" + DIR_ADMIN_PAGES_CHEF + "modificaChef/" + idChef;
 		}
@@ -114,6 +120,7 @@ public class BuffetController {
 							   Model model) {
 		Buffet buffet = this.buffetService.findById(idBuffet);
 		Chef chef = this.chefService.findById(idChef);
+		FileStore.removeImg(DIR_FOLDER_IMG, buffet.getImg());
 		chef.getBuffets().remove(buffet);
 		this.buffetService.delete(buffet);
 		this.chefService.save(chef);

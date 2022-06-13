@@ -13,6 +13,9 @@ import javax.validation.constraints.NotBlank;
 @Entity
 @Table(name = "users")
 public class User {
+	
+	public static final String DIR_FOLDER_IMG = "user/profilo";
+	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -26,6 +29,7 @@ public class User {
 	@OneToOne(fetch = FetchType.EAGER, mappedBy="user", cascade = CascadeType.ALL)
 	private Credentials credentials;
 
+	private String img;
 	
 	/* methods */
 	public Long getId() {
@@ -54,6 +58,14 @@ public class User {
 
 	public void setCredentials(Credentials credentials) {
 		this.credentials = credentials;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 	
 }

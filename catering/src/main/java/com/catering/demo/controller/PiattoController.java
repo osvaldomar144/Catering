@@ -1,6 +1,7 @@
 package com.catering.demo.controller;
 
 import static com.catering.demo.model.Buffet.DIR_ADMIN_PAGES_BUFFET;
+import static com.catering.demo.model.Piatto.DIR_FOLDER_IMG;
 import static com.catering.demo.model.Piatto.DIR_ADMIN_PAGES_PIATTO;
 import static com.catering.demo.model.Piatto.DIR_PAGES_PIATTO;
 
@@ -16,12 +17,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.catering.demo.controller.validator.PiattoValidator;
 import com.catering.demo.model.Buffet;
 import com.catering.demo.model.Piatto;
 import com.catering.demo.service.BuffetService;
 import com.catering.demo.service.PiattoService;
+import com.catering.demo.utility.FileStore;
 
 @Controller
 public class PiattoController {
@@ -64,11 +68,13 @@ public class PiattoController {
 	@PostMapping("/admin/piatto/aggiungiPiatto/{idBuffet}")
 	public String addPiattoToBuffet(@Valid @ModelAttribute("piatto") Piatto piatto,
 									@PathVariable("idBuffet") Long idBuffet,
+									@RequestParam("file") MultipartFile file,
 									BindingResult bindingResult,
 									Model model) {
 
 		this.piattoValidator.validate(piatto, bindingResult);
 		if(!bindingResult.hasErrors()) {
+			piatto.setImg(FileStore.store(file, DIR_FOLDER_IMG));
 			this.buffetService.addPiatto(idBuffet, piatto);
 			return "redirect:/" + DIR_ADMIN_PAGES_BUFFET + "modificaBuffet/" + idBuffet;
 		}
@@ -108,6 +114,7 @@ public class PiattoController {
 							   Model model) {
 		Piatto piatto = this.piattoService.findById(idPiatto);
 		Buffet buffet = this.buffetService.findById(idBuffet);
+		FileStore.removeImg(DIR_FOLDER_IMG, piatto.getImg());
 		buffet.getPiatti().remove(piatto);
 		this.piattoService.delete(piatto);
 		this.buffetService.save(buffet);

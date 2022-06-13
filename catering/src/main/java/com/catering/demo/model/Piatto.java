@@ -17,6 +17,8 @@ public class Piatto {
 	public static final String DIR_PAGES_PIATTO = "informations/piatto/";
 	public static final String DIR_ADMIN_PAGES_PIATTO = "admin/piatto/";
 	
+	public static final String DIR_FOLDER_IMG = "piatto/profili";
+	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -32,6 +34,7 @@ public class Piatto {
 	@OneToMany (cascade = CascadeType.ALL)
 	private List<Ingrediente> ingredienti;
 
+	private String img;
 	
 	/* methods */
 	public Long getId() {
@@ -72,6 +75,14 @@ public class Piatto {
 	
 	public void setIngredienti(List<Ingrediente> ingredienti) {
 		this.ingredienti = ingredienti;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 	
 	
