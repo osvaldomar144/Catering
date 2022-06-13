@@ -11,12 +11,20 @@
 			</div>
 			<div class="row">
 				<div class="col-md-6">
+
+					<div th:if="${param.error} and ${session}" th:with="errorMsg=${session['SPRING_SECURITY_LAST_EXCEPTION']}">
+						<div class="alert alert-dismissible alert-danger error">
+							UPS! Errore nel Login, controlla di aver inserito correttamente le tue credenziali!
+							<!-- <br>Motivo Errore: <span th:text="${errorMsg}">Demo Invalid input</span>-->
+						</div>
+					</div>
+
 					<div class="form_container">
 						<form th:action="@{/login}" method="post">
 							<div><input type="text" class="form-control" placeholder="Username" name="username" required></div>
-							
+
 							<div><input type="password" class="form-control" placeholder="Password" name="password" required></div>
-							
+
 							<div class="btn_box"><button type="submit">Conferma</button></div>
 						</form>
 					</div>
@@ -38,11 +46,11 @@
 					<img style="width: 100%" src="/images/login-image.gif">
 				</div>
 			</div>
-			
+
 			<div th:replace="fragments/layout.html :: backButton(back='/')"></div>
 		</div> <!-- end container -->
 	</section>
-	
+
 	<footer th:replace="fragments/layout.html :: fondo"></footer>
 	<div th:replace="fragments/layout.html :: jsFiles"></div>
 </body>
