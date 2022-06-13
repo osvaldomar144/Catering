@@ -114,7 +114,10 @@ public class PiattoController {
 							   Model model) {
 		Piatto piatto = this.piattoService.findById(idPiatto);
 		Buffet buffet = this.buffetService.findById(idBuffet);
+		
 		FileStore.removeImg(DIR_FOLDER_IMG, piatto.getImg());
+		piatto.getIngredienti().stream().forEach(ingrediente -> ingrediente.eliminaImmagine());
+		
 		buffet.getPiatti().remove(piatto);
 		this.piattoService.delete(piatto);
 		this.buffetService.save(buffet);

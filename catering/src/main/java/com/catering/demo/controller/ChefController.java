@@ -108,9 +108,15 @@ public class ChefController {
 	public String deleteChef(@PathVariable("id") Long id,  Model model) {
 		Chef chef = this.chefService.findById(id);
 		FileStore.removeImg(DIR_FOLDER_IMG, chef.getImg());
+		
+		//eliminazione immagini a cascata
+		chef.getBuffets().stream().forEach(buffet -> buffet.eliminaImmagine());
+		
 		this.chefService.delete(chef);		
 		return this.adminChefs(model);
 	}
+	
+	
 	
 	
 }

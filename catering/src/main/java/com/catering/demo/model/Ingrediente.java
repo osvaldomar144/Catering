@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
+import com.catering.demo.utility.FileStore;
+
 @Entity
 public class Ingrediente {
 	
@@ -67,5 +69,9 @@ public class Ingrediente {
 
 	public void setImg(String img) {
 		this.img = img;
+	}
+	
+	public void eliminaImmagine() {
+		FileStore.removeImg(DIR_FOLDER_IMG, this.getImg());
 	}
 }

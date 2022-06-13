@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
+import com.catering.demo.utility.FileStore;
+
 @Entity
 public class Piatto {
 	
@@ -83,6 +85,11 @@ public class Piatto {
 
 	public void setImg(String img) {
 		this.img = img;
+	}
+	
+	public void eliminaImmagine() {
+		FileStore.removeImg(DIR_FOLDER_IMG, this.getImg());
+		this.getIngredienti().stream().forEach(ingrediente -> ingrediente.eliminaImmagine());
 	}
 	
 	

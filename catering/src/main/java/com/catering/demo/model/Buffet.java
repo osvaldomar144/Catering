@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
+import com.catering.demo.utility.FileStore;
+
 @Entity
 public class Buffet {
 	
@@ -79,5 +81,11 @@ public class Buffet {
 	public void setImg(String img) {
 		this.img = img;
 	}
+	
+	public void eliminaImmagine() {
+		FileStore.removeImg(DIR_FOLDER_IMG, this.getImg());
+		this.getPiatti().stream().forEach(piatto -> piatto.eliminaImmagine());
+	}
+	
 
 }
