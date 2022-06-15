@@ -27,7 +27,7 @@ public class Credentials {
 	private String username;
 	
 	@NotBlank
-	@Size (min = 8, max = 255)
+	//@Size (min = 8, max = 255)
 	private String password;
 	
 	private String ruolo;
@@ -71,6 +71,10 @@ public class Credentials {
 	
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }

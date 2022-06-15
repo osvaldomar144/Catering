@@ -31,6 +31,11 @@ public class CredentialsService {
 	}
 	
 	@Transactional
+	public Credentials save(Credentials credentials) {
+		return credentialsRepository.save(credentials);
+	}
+	
+	@Transactional
 	public Credentials saveCredentials(Credentials credentials) {
 		if (credentials.getRuolo() == null) {
 			credentials.setRuolo(Credentials.GENERIC_USER_ROLE);

@@ -47,13 +47,16 @@
 							<th th:text="${piatto.nome}">Nome</th>
 							<th th:text="${piatto.descrizione}">Descrizione</th>
 							<th><a class="btn btn-success" th:href="@{/admin/piatto/modificaPiatto/} + ${piatto.id}">Modifica</a></th>
-							<th><a class="btn btn-danger" th:href="@{/admin/piatto/delete/} + ${buffet.id} + '/' + ${piatto.id}">Delete</a></th>
+							<th>
+								<div th:replace="fragments/layout.html :: modalDelete(nome='il piatto: '+${piatto.nome}+' del buffet: '+${buffet.nome}, link='/admin/piatto/delete/' + ${buffet.id} + '/' + ${piatto.id})"></div>
+							</th>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 			<br>
-
+		<div th:replace="fragments/layout.html :: backButton(back='/admin/chef/modificaChef/'+${buffet.chef.id}, text1='Modifica Chef', 
+		                                                     back2='/admin/buffet', text2='Elenco Buffets')"></div>
 		</div> <!-- end container -->
 	</section>
 

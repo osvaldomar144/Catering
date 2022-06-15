@@ -698,6 +698,10 @@ a:focus {
 	background-image: linear-gradient(45deg, #222831, #353232bd 100%)
 }
 
+.margin-button {
+	margin: 25px 10px;
+}
+
 /****** PRESENTAZIONE INFORMAZIONI ******/
 .informations-section {
 	height: 380px;
@@ -759,6 +763,10 @@ a:focus {
 /****** PAGE PROFILE ******/
 .margin-info-profile {
 	margin-top: 8%;
+}
+
+.pos-profile-alert{
+	margin: 8% auto -8% auto;
 }
 
 .logout-hover:hover{

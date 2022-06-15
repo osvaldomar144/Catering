@@ -50,7 +50,7 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter{
 			//google
 			.and().oauth2Login()
 			.loginPage("/login")
-			.defaultSuccessUrl("/default")
+			.defaultSuccessUrl("/")
 			
 			
 			

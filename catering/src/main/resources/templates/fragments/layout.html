@@ -65,7 +65,7 @@
 	              </a>
 			  </div>
 			  <div sec:authorize="isAuthenticated()">
-	              <a th:href="@{/profile}" class="order_online">
+	              <a sec:authorize="hasAnyAuthority('ADMIN', 'GENERIC_USER')" th:href="@{/profile}" class="order_online">
 	                Profile
 	              </a>
 	              <a th:href="@{/logout}" class="order_online">
@@ -77,17 +77,54 @@
         </nav>
       </div>
     </header> 
-    
+
 <!-- ============================================================================ -->
-<!-- 							BACK BUTTON                  					  -->
+<!-- 							MODAL CANCELLAZIONE                  					  								-->
 <!-- ============================================================================ -->
-    <div th:fragment="backButton(back)">
-    	<br>
-	    <a th:href="@{${back}}" class="btn btn-info">« Indietro</a><br>
+
+<div th:fragment="modalDelete(nome, link)">
+	<!-- Button trigger modal -->
+	<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalForDelete">
+		Delete
+	</button>
+
+	<!-- Modal -->
+	<div class="modal fade" id="modalForDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle" th:text="'Sei sicuro di voler eliminare '+${nome}+' ?'"></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<strong>ATTENZIONE.</strong> <em>questa operazione è irreversibile.</em>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-info" data-dismiss="modal">Annulla</button>
+					<a class="btn btn-danger" th:href="@{${link}}">Delete</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<!-- ============================================================================ -->
+<!-- 							BACK BUTTON                  					  												-->
+<!-- ============================================================================ -->
+    <div th:fragment="backButton(back, text1, back2, text2)" class="row">
+	    <a th:href="@{${back}}" class="btn btn-info margin-button" th:text="'« ' + ${text1}"></a>
+	    <div th:if="${back2 != 'no'}">
+	    	<a th:href="@{${back2}}" class="btn btn-info margin-button" th:text="'« ' + ${text2}"></a>
+	  	</div>
     </div>
 
 <!-- ============================================================================ -->
-<!-- 							FOOTER                  					      -->
+<!-- 							FOOTER                  					      												-->
 <!-- ============================================================================ -->   
 	<footer th:fragment="fondo" class="footer_section">
 	    <div class="container">

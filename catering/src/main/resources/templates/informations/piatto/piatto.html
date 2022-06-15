@@ -31,14 +31,19 @@
 					<div th:each="ingrediente : ${ingredienti}" class="col-sm-6 col-lg-4 all">
 						<div class="box">
 							<div>
-								<div class="img-box">
+								<div th:if="${ingrediente.img == 'profili'}" class="img-box">
 									<img src="/images/ingrediente.png" alt="">
+								</div>
+								<div th:unless ="${ingrediente.img == 'profili'}" class="img-box">
+									<img th:src="'/images/ingrediente/profili/' + ${ingrediente.img}" alt="">
 								</div>
 								<div class="detail-box">
 									<strong>Nome:</strong>
 									<p th:text="${ingrediente.nome}">Nome Ingrediente</p>
 									<strong>Descrizione:</strong>
 									<p th:text="${ingrediente.descrizione}">Descrizione</p>
+									<strong>Origine:</strong>
+									<p th:text="${ingrediente.origine}">Descrizione</p>
 								</div>
 							</div>
 						</div>
@@ -47,6 +52,8 @@
 
 			</div>
 			
+
+			<div th:replace="fragments/layout.html :: backButton(back='/', text1='Home', back2='/piatti', text2='Elenco Piatti')"></div>
 		</div> <!-- end container -->
 	</section>
 	

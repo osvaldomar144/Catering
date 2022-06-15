@@ -12,9 +12,25 @@
 
 	<section class="generic_section layout_padding">
 		<div class="container">
-			
 
-
+			<div th:if="${credentials.ruolo == 'ADMIN'}" class="float-right">
+				<a th:href="@{/admin}" class="btn btn-lg btn-warning">Amministrazione</a>
+			</div>
+			<div th:if="${okChange != null}">
+				<div th:if="${okChange == true}"class="alert alert-success alert-dismissible pos-profile-alert fade show" role="alert">
+					Password Cambiata Correttamente!
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div th:unless="${okChange == true}" class="alert alert-danger alert-dismissible pos-profile-alert fade show" role="alert">
+					Errore: Password non Cambiata :C
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+			</div>
+			<br>
 			<div class="row margin-info-profile">
 				<div class="col-4">
 					<div class="list-group" id="list-tab" role="tablist">
@@ -40,29 +56,36 @@
 						</div>
 						<div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
 							<h2 align="center"> Cambia Immagine Profilo </h2><br>
-							<form>
+							<form th:action="@{/changeImgProfile/} + ${user.id}" method="post" enctype="multipart/form-data">
 								<div class="form-group">
-									<input type="file" class="form-control-file">
+									<input type="file" class="form-control-file" name="file" required>
 								</div>
 								<button type="submit" class="btn btn-success">Conferma</button>
 							</form>
 						</div>
 						<div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
-							<h2 align="center"> Modifica Username e Password </h2><br>
-							<form th:object="${credentials}">
+							<h2 align="center"> Modifica Password </h2><br>
+							<form th:action="@{/changeUserAndPass/} + *{id}" method="post" th:object="${credentials}">
+								<div th:if="${#fields.hasGlobalErrors()}" class="alert alert-danger" role="alert">
+									<h4 align="center" th:each="err : ${#fields.globalErrors()}" th:text="'Errore: ' + ${err}">...</h4>
+								</div>
 								<div class="form-group">
 									<label for="inputUsername">Username</label>
-									<input type="text" class="form-control" id="inputUsername" aria-describedby="username" placeholder="Enter username" th:field="*{username}">
+									<input type="text" readonly class="form-control" id="inputUsername" aria-describedby="username" placeholder="Enter username" th:field="*{username}">
+									<div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="alert alert-danger" role="alert"></div>
 								</div>
 								<div class="form-group">
 									<label for="inputPassword">Nuova Password</label>
-									<input type="password" class="form-control" id="inputPassword" placeholder="Password">
+									<input type="password" class="form-control" id="inputPassword" placeholder="Password" 
+									th:field="*{password}" required>
+									<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger" role="alert"></div>
 								</div>
 								<div class="form-group">
 									<label for="inputConfirmPassword">Conferma Nuova Password</label>
-									<input type="password" class="form-control" id="inputConfirmPassword" placeholder="Confirm Password">
+									<input type="password" class="form-control" id="inputConfirmPassword" placeholder="Confirm Password"
+									name="confirmPass" required>
 								</div>
-								<button type="submit" class="btn btn-primary">Submit</button>
+								<button type="submit" class="btn btn-primary">Modifica</button>
 							</form>
 						</div>
 					</div>
@@ -70,7 +93,7 @@
 			</div>
 
 			
-			<div th:replace="fragments/layout.html :: backButton(back='/')"></div>
+			<div th:replace="fragments/layout.html :: backButton(back='/', text1='Indietro', back2='no', text2=' ')"></div>
 		</div> <!-- end container -->
 	</section>
 	
