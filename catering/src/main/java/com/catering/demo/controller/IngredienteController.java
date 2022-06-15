@@ -65,10 +65,10 @@ public class IngredienteController {
 
 	@PostMapping("/admin/ingrediente/aggiungiIngrediente/{idPiatto}")
 	public String addIngredienteToPiatto(@Valid @ModelAttribute("ingrediente") Ingrediente ingrediente,
-										@PathVariable("idPiatto") Long idPiatto,
-										@RequestParam("file") MultipartFile file,
-										BindingResult bindingResult,
-										Model model) {
+										 BindingResult bindingResult,
+										 @PathVariable("idPiatto") Long idPiatto,
+										 @RequestParam("file") MultipartFile file,
+										 Model model) {
 
 		//this.ingredienteValidator.validate(ingrediente, bindingResult);
 		if(!bindingResult.hasErrors()) {

@@ -4,11 +4,15 @@
 <body>
 	<header th:replace="fragments/layout.html :: navMenu"></header>
 
-
 	<section class="buffet-background informations-section ">
-		<div class="img-profile-informations" >
+
+		<div th:if="${buffet.img == 'profili'}" class="img-profile-informations">
+			<img src="/images/buffet.png" alt="">
+		</div>
+		<div th:unless ="${buffet.img == 'profili'}" class="img-profile-informations">
 			<img th:src="'/images/buffet/profili/' + ${buffet.img}" alt="Profile Buffet">
 		</div>
+
 	</section>
 	
 	<section class="generic_section layout_padding">
@@ -31,8 +35,11 @@
 					<div th:each="piatto : ${piatti}" class="col-sm-6 col-lg-4 all">
 						<div class="box">
 							<div>
-								<div class="img-box">
+								<div th:if="${piatto.img == 'profili'}" class="img-box">
 									<img src="/images/piatto.png" alt="">
+								</div>
+								<div th:unless ="${piatto.img == 'profili'}" class="img-box">
+									<img th:src="'/images/piatto/profili/' + ${piatto.img}" alt="">
 								</div>
 								<div class="detail-box">
 									<strong>Nome:</strong>

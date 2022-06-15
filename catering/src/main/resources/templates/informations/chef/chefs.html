@@ -14,9 +14,14 @@
 				<div th:each="chef : ${chefs}" class="col-sm-6 col-lg-4 all">
 					<div class="box">
 						<div>
-							<div class="img-box">
+
+							<div th:if="${chef.img == 'profili'}" class="img-box">
 								<img src="/images/chef.png" alt="">
 							</div>
+							<div th:unless ="${chef.img == 'profili'}" class="img-box">
+								<img th:src="'/images/chef/profili/' + ${chef.img}" alt="Profile Chef">
+							</div>
+
 							<div class="detail-box">
 								<strong>Nome e Cognome:</strong>
 								<p th:text="${chef.nome} + ' ' + ${chef.cognome}">Nome e Cognome Chef</p>

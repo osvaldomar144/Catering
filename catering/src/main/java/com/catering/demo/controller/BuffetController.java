@@ -67,9 +67,9 @@ public class BuffetController {
 	
 	@PostMapping("/admin/buffet/aggiungiBuffet/{idChef}")
 	public String addBuffetToChef(@Valid @ModelAttribute("buffet") Buffet buffet, 
+								  BindingResult bindingResult,
 								  @PathVariable("idChef") Long idChef,
 								  @RequestParam("file") MultipartFile file,
-			   					  BindingResult bindingResult,
 			   					  Model model) {
 
 		this.buffetValidator.validate(buffet, bindingResult);

@@ -68,8 +68,8 @@ public class ChefController {
 	
 	@PostMapping("/admin/chef/aggiungiChef")
 	public String aggiungiChef(@Valid @ModelAttribute("chef") Chef chef, 
+							   BindingResult bindingResult,
 			 				   @RequestParam("file") MultipartFile file,
-			 				   BindingResult bindingResult,
 							   Model model) {
 		this.chefValidator.validate(chef, bindingResult);	
 		if(!bindingResult.hasErrors()) {
@@ -89,7 +89,7 @@ public class ChefController {
 	}
 	
 	@PostMapping("/admin/chef/modificaChef/{idChef}")
-	public String modificaChef(@ModelAttribute("chef") Chef chef,
+	public String modificaChef(@Valid @ModelAttribute("chef") Chef chef,
 							   BindingResult bindingResult,
 							   @PathVariable("idChef") Long idChef,
 							   Model model) {

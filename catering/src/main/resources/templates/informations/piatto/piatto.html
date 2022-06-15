@@ -4,11 +4,15 @@
 <body>
 	<header th:replace="fragments/layout.html :: navMenu"></header>
 
-
 	<section class="piatto-background informations-section ">
-		<div class="img-profile-informations" >
+
+		<div th:if="${piatto.img == 'profili'}" class="img-profile-informations">
+			<img src="/images/piatto.png" alt="">
+		</div>
+		<div th:unless ="${piatto.img == 'profili'}" class="img-profile-informations">
 			<img th:src="'/images/piatto/profili/' + ${piatto.img}" alt="Profile Piatto">
 		</div>
+
 	</section>
 
 	<section class="generic_section layout_padding">

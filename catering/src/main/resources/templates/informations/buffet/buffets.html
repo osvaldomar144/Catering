@@ -4,34 +4,37 @@
 <body>
 	<header th:replace="fragments/layout.html :: navMenu"></header>
 
-	  <section class="boxInfo_section layout_padding">
-	    <div class="container">
-	      <div class="heading_container">
-	        <h2>Elenco Buffets</h2>
-	      </div>
-	      
-        <div class="row grid">
-          <div th:each="buffet : ${buffets}" class="col-sm-6 col-lg-4 all">
-            <div class="box">
-              <div>
-                <div class="img-box">
-                  <img src="/images/buffet.png" alt="">
-                </div>
-                <div class="detail-box">
-                  <strong>Nome</strong>
-                  <p th:text="${buffet.nome}">Nome Buffet</p>
-                  <strong>Descrizione:</strong>
-                  <p th:text="${buffet.descrizione}">Nazionalita</p>
-                  <p><a th:href="@{/buffet/} + ${buffet.id}" class="btn btn-sm">Dettagli</a></p>
-                </div>
-              </div>
-            </div>
-          </div>
-      </div>
-	      
-	      <div th:replace="fragments/layout.html :: backButton(back='/', text1='Indietro', back2='no', text2=' ')"></div>
-	    </div> <!-- end container -->
-	  </section>
+	<section class="boxInfo_section layout_padding">
+		<div class="container">
+			<div class="heading_container">
+				<h2>Elenco Buffets</h2>
+			</div>
+			
+			<div class="row grid">
+				<div th:each="buffet : ${buffets}" class="col-sm-6 col-lg-4 all">
+					<div class="box">
+						<div>
+							<div th:if="${buffet.img == 'profili'}" class="img-box">
+								<img src="/images/buffet.png" alt="">
+							</div>
+							<div th:unless ="${buffet.img == 'profili'}" class="img-box">
+								<img th:src="'/images/buffet/profili/' + ${buffet.img}" alt="Profile Buffet">
+							</div>
+							<div class="detail-box">
+								<strong>Nome</strong>
+								<p th:text="${buffet.nome}">Nome Buffet</p>
+								<strong>Descrizione:</strong>
+								<p th:text="${buffet.descrizione}">Nazionalita</p>
+								<p><a th:href="@{/buffet/} + ${buffet.id}" class="btn btn-sm">Dettagli</a></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div th:replace="fragments/layout.html :: backButton(back='/', text1='Indietro', back2='no', text2=' ')"></div>
+		</div> <!-- end container -->
+	</section>
 	
 	<footer th:replace="fragments/layout.html :: fondo"></footer>
 	<div th:replace="fragments/layout.html :: jsFiles"></div>
