@@ -31,6 +31,21 @@
 				</form>
 			</div>
 			<br><br>
+			<h3>Modifica Immagine Profilo Piatto</h3><br>
+			<div class="form_container">
+				<form th:action="@{/admin/piatto/changeImg/} + ${piatto.id}" method="post" enctype="multipart/form-data">
+					<div><input type="file" class="form-control-file" name="file" required></div>
+
+					<div class="preview-img">
+						<h5><em>Immagine attuale:</em></h5>
+						<img th:if="${piatto.img == 'profili'}" src="/images/piatto.png" alt="Profile Piatto">
+						<img th:unless ="${piatto.img == 'profili'}" th:src="'/images/piatto/profili/' + ${piatto.img}" alt="Profile Piatto">
+					</div>
+
+					<div class="btn_box"><button type="submit">Cambia Immagine</button></div>
+				</form>
+			</div>
+			<br><br>
 			<h3>Elenco Ingredienti del Piatto</h3><br>
 			<div class="table-responsive">
 				<table class="table table-striped table-hover">

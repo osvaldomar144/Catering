@@ -29,7 +29,22 @@
 					<div class="btn_box"><button type="submit">Modifica</button></div>
 				</form>
 			</div>
-			<br>
+			<br><br>
+			<h3>Modifica Immagine Profilo Ingrediente</h3><br>
+			<div class="form_container">
+				<form th:action="@{/admin/ingrediente/changeImg/} + ${idPiatto} +'/' + ${ingrediente.id}" method="post" enctype="multipart/form-data">
+					<div><input type="file" class="form-control-file" name="file" required></div>
+
+					<div class="preview-img">
+						<h5><em>Immagine attuale:</em></h5>
+						<img th:if="${ingrediente.img == 'profili'}" src="/images/ingrediente.png" alt="Profile ingrediente">
+						<img th:unless ="${ingrediente.img == 'profili'}" th:src="'/images/ingrediente/profili/' + ${ingrediente.img}" alt="Profile ingrediente">
+					</div>
+
+					<div class="btn_box"><button type="submit">Cambia Immagine</button></div>
+				</form>
+			</div>
+			<br><br>
 		<div th:replace="fragments/layout.html :: backButton(back='/admin/piatto/modificaPiatto/'+${idPiatto}, text1='Modifica Piatto', back2='/admin/buffet', text2='Elenco Buffets')"></div>
 		</div> <!-- end container -->
 	</section>

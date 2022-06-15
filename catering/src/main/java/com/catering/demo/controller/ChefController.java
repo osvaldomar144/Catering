@@ -99,8 +99,24 @@ public class ChefController {
 			this.chefService.update(chef, chef.getId());
 			return this.adminChefs(model);
 		}
+		Chef c = this.chefService.findById(idChef);
+		chef.setImg(c.getImg());
 		model.addAttribute("buffets", this.chefService.getBuffetsOfChef(idChef));
 		return  DIR_ADMIN_PAGES_CHEF + "modificaChef";
+	}
+	
+	@PostMapping("/admin/chef/changeImg/{idChef}")
+	public String changeImgChef(@PathVariable("idChef") Long idChef,
+			   				@RequestParam("file") MultipartFile file, Model model) {
+		
+		Chef c = this.chefService.findById(idChef);
+		if(!c.getImg().equals("profili")) {
+			FileStore.removeImg(DIR_FOLDER_IMG, c.getImg());
+		}
+
+		c.setImg(FileStore.store(file, DIR_FOLDER_IMG));
+		this.chefService.save(c);
+		return this.selezionaChef(idChef, model);
 	}
 	
 	// -- CANCELLAZIONE -- //

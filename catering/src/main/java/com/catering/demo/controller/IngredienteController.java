@@ -1,7 +1,7 @@
 package com.catering.demo.controller;
 
-import static com.catering.demo.model.Ingrediente.DIR_FOLDER_IMG;
 import static com.catering.demo.model.Ingrediente.DIR_ADMIN_PAGES_INGREDIENTE;
+import static com.catering.demo.model.Ingrediente.DIR_FOLDER_IMG;
 import static com.catering.demo.model.Ingrediente.DIR_PAGES_INGREDIENTE;
 import static com.catering.demo.model.Piatto.DIR_ADMIN_PAGES_PIATTO;
 
@@ -102,8 +102,25 @@ public class IngredienteController {
 			this.ingredienteService.update(ingrediente, ingrediente.getId());
 			return "redirect:/" + DIR_ADMIN_PAGES_PIATTO + "modificaPiatto/" + idPiatto;
 		}
+		Ingrediente i = this.ingredienteService.findById(idIngrediente);
+		ingrediente.setImg(i.getImg());
 		//ingrediente.setPiatto(this.piattoService.findById(idPiatto));
 		return DIR_ADMIN_PAGES_INGREDIENTE + "modificaIngrediente";
+	}
+	
+	@PostMapping("/admin/ingrediente/changeImg/{idPiatto}/{id}")
+	public String changeImgIngrediente(@PathVariable("id") Long id,
+									   @PathVariable("idPiatto") Long idPiatto,
+			   					       @RequestParam("file") MultipartFile file, Model model) {
+		
+		Ingrediente i = this.ingredienteService.findById(id);
+		if(!i.getImg().equals("profili")) {
+			FileStore.removeImg(DIR_FOLDER_IMG, i.getImg());
+		}
+
+		i.setImg(FileStore.store(file, DIR_FOLDER_IMG));
+		this.ingredienteService.save(i);
+		return this.selezionaIngrediente(idPiatto, id, model);
 	}
 	
 	// -- CANCELLAZIONE -- //

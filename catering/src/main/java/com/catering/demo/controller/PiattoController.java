@@ -1,8 +1,8 @@
 package com.catering.demo.controller;
 
 import static com.catering.demo.model.Buffet.DIR_ADMIN_PAGES_BUFFET;
-import static com.catering.demo.model.Piatto.DIR_FOLDER_IMG;
 import static com.catering.demo.model.Piatto.DIR_ADMIN_PAGES_PIATTO;
+import static com.catering.demo.model.Piatto.DIR_FOLDER_IMG;
 import static com.catering.demo.model.Piatto.DIR_PAGES_PIATTO;
 
 import java.util.List;
@@ -103,8 +103,24 @@ public class PiattoController {
 			return "redirect:/" + DIR_ADMIN_PAGES_BUFFET + "modificaBuffet/" + idBuffet;
 		}
 		piatto.setBuffet(buffetService.findById(idBuffet));
+		Piatto p = this.piattoService.findById(idPiatto);
+		piatto.setImg(p.getImg());
 		model.addAttribute("ingredienti", this.piattoService.getIngredientiOfPiatto(piatto.getId()));
 		return DIR_ADMIN_PAGES_PIATTO + "modificaPiatto";
+	}
+	
+	@PostMapping("/admin/piatto/changeImg/{idPiatto}")
+	public String changeImgPiatto(@PathVariable("idPiatto") Long idPiatto,
+			   					  @RequestParam("file") MultipartFile file, Model model) {
+		
+		Piatto p = this.piattoService.findById(idPiatto);
+		if(!p.getImg().equals("profili")) {
+			FileStore.removeImg(DIR_FOLDER_IMG, p.getImg());
+		}
+
+		p.setImg(FileStore.store(file, DIR_FOLDER_IMG));
+		this.piattoService.save(p);
+		return this.selezionaPiatto(idPiatto, model);
 	}
 	
 	// -- CANCELLAZIONE -- //

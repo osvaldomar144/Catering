@@ -702,6 +702,14 @@ a:focus {
 	margin: 25px 10px;
 }
 
+.preview-img {
+	margin: 2.5% 0px;
+}
+
+.preview-img img{
+	max-width: 200px;
+}
+
 /****** PRESENTAZIONE INFORMAZIONI ******/
 .informations-section {
 	height: 380px;

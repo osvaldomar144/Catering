@@ -1,9 +1,9 @@
 package com.catering.demo.controller;
 
 import static com.catering.demo.model.Buffet.DIR_ADMIN_PAGES_BUFFET;
+import static com.catering.demo.model.Buffet.DIR_FOLDER_IMG;
 import static com.catering.demo.model.Buffet.DIR_PAGES_BUFFET;
 import static com.catering.demo.model.Chef.DIR_ADMIN_PAGES_CHEF;
-import static com.catering.demo.model.Buffet.DIR_FOLDER_IMG;
 
 import java.util.List;
 
@@ -109,8 +109,24 @@ public class BuffetController {
 			return "redirect:/" + DIR_ADMIN_PAGES_CHEF + "modificaChef/" + idChef;
 		}
 		buffet.setChef(chefService.findById(idChef));
+		Buffet b = this.buffetService.findById(id);
+		buffet.setImg(b.getImg());
 		model.addAttribute("piatti", this.buffetService.getPiattiOfBuffet(buffet.getId()));
 		return DIR_ADMIN_PAGES_BUFFET + "modificaBuffet";
+	}
+	
+	@PostMapping("/admin/buffet/changeImg/{idBuffet}")
+	public String changeImgBuffet(@PathVariable("idBuffet") Long idBuffet,
+			   					  @RequestParam("file") MultipartFile file, Model model) {
+		
+		Buffet b = this.buffetService.findById(idBuffet);
+		if(!b.getImg().equals("profili")) {
+			FileStore.removeImg(DIR_FOLDER_IMG, b.getImg());
+		}
+
+		b.setImg(FileStore.store(file, DIR_FOLDER_IMG));
+		this.buffetService.save(b);
+		return this.selezionaBuffet(idBuffet, model);
 	}
 	
 	// -- CANCELLAZIONE -- //

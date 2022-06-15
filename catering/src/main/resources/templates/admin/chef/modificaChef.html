@@ -30,6 +30,21 @@
 
 					<div class="btn_box"><button type="submit">Modifica</button></div>
 				</form>
+				<br><br>
+				<h3>Modifica Immagine Profilo Chef</h3><br>
+				<div class="form_container">
+					<form th:action="@{/admin/chef/changeImg/} + ${chef.id}" method="post" enctype="multipart/form-data">
+						<div><input type="file" class="form-control-file" name="file" required></div>
+
+						<div class="preview-img">
+							<h5><em>Immagine attuale:</em></h5>
+							<img th:if="${chef.img == 'profili'}" src="/images/chef.png" alt="Profile chef">
+							<img th:unless ="${chef.img == 'profili'}" th:src="'/images/chef/profili/' + ${chef.img}" alt="Profile Chef">
+						</div>
+
+						<div class="btn_box"><button type="submit">Cambia Immagine</button></div>
+					</form>
+				</div>
 			</div>
 			<br><br>
 			<h3>Buffet Proposti dallo Chef</h3><br>
