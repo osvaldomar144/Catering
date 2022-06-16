@@ -14,7 +14,7 @@
 
 					<div th:if="${param.error} and ${session}" th:with="errorMsg=${session['SPRING_SECURITY_LAST_EXCEPTION']}">
 						<div class="alert alert-dismissible alert-danger error">
-							UPS! Errore nel Login, controlla di aver inserito correttamente le tue credenziali!
+							OPS! Errore nel Login, controlla di aver inserito correttamente le tue credenziali!
 							<!-- <br>Motivo Errore: <span th:text="${errorMsg}">Demo Invalid input</span>-->
 						</div>
 					</div>

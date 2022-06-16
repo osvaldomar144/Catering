@@ -18,13 +18,13 @@
           <div th:if="${#fields.hasGlobalErrors()}" class="alert alert-danger" role="alert">
             <h4 align="center" th:each="err : ${#fields.globalErrors()}" th:text="'Errore: ' + ${err}">...</h4>
           </div>
-          <div><input type="text" class="form-control" placeholder="Nome" th:field="*{nome}" required></div>
+          <div><input type="text" class="form-control" placeholder="Nome" th:field="*{nome}"></div>
           <div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="alert alert-danger" role="alert"></div>
 
-          <div><input type="text" class="form-control" placeholder="Origine" th:field="*{origine}" required></div>
+          <div><input type="text" class="form-control" placeholder="Origine" th:field="*{origine}"></div>
           <div th:if="${#fields.hasErrors('origine')}" th:errors="*{origine}" class="alert alert-danger" role="alert"></div>
 
-          <div><input type="text" class="form-control" placeholder="Descrizione" th:field="*{descrizione}" required></div>
+          <div><input type="text" class="form-control" placeholder="Descrizione" th:field="*{descrizione}"></div>
           <div th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}" class="alert alert-danger" role="alert"></div>
 
           <div><input type="file" class="form-control-file" name="file"></div>

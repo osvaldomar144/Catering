@@ -16,10 +16,10 @@
 					<div th:if="${#fields.hasGlobalErrors()}" class="alert alert-danger" role="alert">
 						<h4 align="center" th:each="err : ${#fields.globalErrors()}" th:text="'Errore: ' + ${err}">...</h4>
 					</div>
-					<div><input type="text" class="form-control" placeholder="Nome" th:field="*{nome}" required></div>
+					<div><input type="text" class="form-control" placeholder="Nome" th:field="*{nome}"></div>
 					<div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="alert alert-danger" role="alert"></div>
 
-					<div><input type="text" class="form-control" placeholder="Cognome" th:field="*{cognome}" required></div>
+					<div><input type="text" class="form-control" placeholder="Cognome" th:field="*{cognome}"></div>
 					<div th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}" class="alert alert-danger" role="alert"></div>
 
 					<div><input type="text" class="form-control" placeholder="Nazionalità" th:field="*{nazionalita}" required></div>
