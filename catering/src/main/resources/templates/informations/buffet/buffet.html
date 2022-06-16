@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout.html :: headerfiles(title='Informazioni Buffet')"> </head>
+<body>
+	<header th:replace="fragments/layout.html :: navMenu"></header>
+
+	<section class="buffet-background informations-section ">
+
+		<div th:if="${buffet.img == 'profili'}" class="img-profile-informations">
+			<img src="/images/buffet.png" alt="">
+		</div>
+		<div th:unless ="${buffet.img == 'profili'}" class="img-profile-informations">
+			<img th:src="'/images/buffet/profili/' + ${buffet.img}" alt="Profile Buffet">
+		</div>
+
+	</section>
+	
+	<section class="generic_section layout_padding">
+		<div class="container">
+			<div class="card-informations" th:object="${buffet}">
+				<div>
+					<strong>Nome Buffet: </strong><span th:text="*{nome}"></span><br>
+					<strong>Descrizione: </strong><span th:text="*{descrizione}"></span><br>
+				</div>
+
+			</div>
+
+
+			<div class="boxInfo_section layout_padding">
+				<div class="heading_container">
+					<h2>Piatti del Buffet</h2><br>
+				</div>
+
+				<div class="row grid">
+					<div th:each="piatto : ${piatti}" class="col-sm-6 col-lg-4 all">
+						<div class="box">
+							<div>
+								<div th:if="${piatto.img == 'profili'}" class="img-box">
+									<img src="/images/piatto.png" alt="">
+								</div>
+								<div th:unless ="${piatto.img == 'profili'}" class="img-box">
+									<img th:src="'/images/piatto/profili/' + ${piatto.img}" alt="">
+								</div>
+								<div class="detail-box">
+									<strong>Nome:</strong>
+									<p th:text="${piatto.nome}">Nome Buffet</p>
+									<strong>Descrizione:</strong>
+									<p th:text="${piatto.descrizione}">Descrizione</p>
+									<p><a th:href="@{/piatto/} + ${piatto.id}" class="btn btn-sm">Dettagli</a></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div> <!-- end container -->
+	</section>
+	
+	<footer th:replace="fragments/layout.html :: fondo"></footer>
+	<div th:replace="fragments/layout.html :: jsFiles"></div>
+</body>
+</html>

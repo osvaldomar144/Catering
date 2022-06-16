@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout.html :: headerfiles(title='Modifica Chef')"> </head>
+<body>
+	<header th:replace="fragments/layout.html :: navMenu"></header>
+
+	<section class="generic_section layout_padding">
+		<div class="container">
+			<div class="heading_container">
+				<h2>Modifica Chef</h2>
+			</div>
+
+			<a class="btn btn-success btn-lg" th:href="@{/admin/buffet/aggiungiBuffet/} + ${chef.id}">Aggiungi Nuovo Buffet</a>
+			<br><br>
+
+
+			<div class="form_container">
+				<form th:action="@{/admin/chef/modificaChef/} + *{id}" method="post" th:object="${chef}">
+					<div th:if="${#fields.hasGlobalErrors()}" class="alert alert-danger" role="alert">
+						<h4 align="center" th:each="err : ${#fields.globalErrors()}" th:text="'Errore: ' + ${err}">...</h4>
+					</div>
+					<div>Nome:<br><input type="text" class="form-control" placeholder="Nome" th:field="*{nome}"></div>
+					<div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="alert alert-danger" role="alert"></div>
+					
+					<div>Cognome:<br><input type="text" class="form-control" placeholder="Cognome" th:field="*{cognome}"></div>
+					<div th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}" class="alert alert-danger" role="alert"></div>
+					
+					<div>Nazionalità:<br><input type="text" class="form-control" placeholder="Nazionalità" th:field="*{nazionalita}"></div>
+					<div th:if="${#fields.hasErrors('nazionalita')}" th:errors="*{nazionalita}" class="alert alert-danger" role="alert"></div>
+
+					<div class="btn_box"><button type="submit">Modifica</button></div>
+				</form>
+				<br><br>
+				<h3>Modifica Immagine Profilo Chef</h3><br>
+				<div class="form_container">
+					<form th:action="@{/admin/chef/changeImg/} + ${chef.id}" method="post" enctype="multipart/form-data">
+						<div><input type="file" class="form-control-file" name="file" required></div>
+
+						<div class="preview-img">
+							<h5><em>Immagine attuale:</em></h5>
+							<img th:if="${chef.img == 'profili'}" src="/images/chef.png" alt="Profile chef">
+							<img th:unless ="${chef.img == 'profili'}" th:src="'/images/chef/profili/' + ${chef.img}" alt="Profile Chef">
+						</div>
+
+						<div class="btn_box"><button type="submit">Cambia Immagine</button></div>
+					</form>
+				</div>
+			</div>
+			<br><br>
+			<h3>Buffet Proposti dallo Chef</h3><br>
+			<div class="table-responsive">
+				<table class="table table-striped table-hover">
+					<thead class="thead-dark">
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Nome</th>
+							<th scope="col">Descrizione</th>
+							<th scope="col"></th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="buffet : ${buffets}">
+							<th scope="row" th:text="${buffet.id}">1</th>
+							<th th:text="${buffet.nome}">Nome</th>
+							<th th:text="${buffet.descrizione}">Descrizione</th>
+							<th><a class="btn btn-success" th:href="@{/admin/buffet/modificaBuffet/} + ${buffet.id}">Modifica</a></th>
+							<th>
+								<div th:replace="fragments/layout.html :: modalDelete(nome='il buffet: '+${buffet.nome}+' dello chef: '+${chef.nome}, link='/admin/buffet/delete/' + ${chef.id} + '/' + ${buffet.id})"></div>
+							</th>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<br>
+
+			<div th:replace="fragments/layout.html :: backButton(back='/admin', text1='Dashboard', back2='/admin/chef', text2='Elenco Chefs')"></div>
+		</div> <!-- end container -->
+	</section>
+
+	<footer th:replace="fragments/layout.html :: fondo"></footer>
+	<div th:replace="fragments/layout.html :: jsFiles"></div>
+</body>
+</html>

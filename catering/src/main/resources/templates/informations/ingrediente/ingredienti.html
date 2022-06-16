@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout.html :: headerfiles(title='Elenco Ingredienti')"> </head>
+<body>
+	<header th:replace="fragments/layout.html :: navMenu"></header>
+
+	<h2>Elenco Ingredienti</h2>
+	<ul>
+		<li th:each="ingrediente : ${ingredienti}">
+			<a th:href="@{'/ingrediente/' + ${ingrediente.id}}" 
+			   th:text="${ingrediente.nome} + ' ' + ${ingrediente.descrizione}">Ingrediente</a>
+		</li>
+	</ul>
+	<br>
+	
+	<footer th:replace="fragments/layout.html :: fondo(back='/')"></footer>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout.html :: headerfiles(title='Informazioni Piatto')"> </head>
+<body>
+	<header th:replace="fragments/layout.html :: navMenu"></header>
+
+	<section class="piatto-background informations-section ">
+
+		<div th:if="${piatto.img == 'profili'}" class="img-profile-informations">
+			<img src="/images/piatto.png" alt="">
+		</div>
+		<div th:unless ="${piatto.img == 'profili'}" class="img-profile-informations">
+			<img th:src="'/images/piatto/profili/' + ${piatto.img}" alt="Profile Piatto">
+		</div>
+
+	</section>
+
+	<section class="generic_section layout_padding">
+		<div class="container">
+			<div class="card-informations" th:object="${piatto}">
+				<div>
+					<strong>Nome del Piatto: </strong><span th:text="*{nome}"></span><br>
+					<strong>Descrizione: </strong><span th:text="*{descrizione}"></span><br>
+				</div>
+
+			</div>
+
+
+			<div class="boxInfo_section layout_padding">
+				<div class="heading_container">
+					<h2>Ingredienti del Piatto</h2><br>
+				</div>
+
+				<div class="row grid">
+					<div th:each="ingrediente : ${ingredienti}" class="col-sm-6 col-lg-4 all">
+						<div class="box">
+							<div>
+								<div th:if="${ingrediente.img == 'profili'}" class="img-box">
+									<img src="/images/ingrediente.png" alt="">
+								</div>
+								<div th:unless ="${ingrediente.img == 'profili'}" class="img-box">
+									<img th:src="'/images/ingrediente/profili/' + ${ingrediente.img}" alt="">
+								</div>
+								<div class="detail-box">
+									<strong>Nome:</strong>
+									<p th:text="${ingrediente.nome}">Nome Ingrediente</p>
+									<strong>Descrizione:</strong>
+									<p th:text="${ingrediente.descrizione}">Descrizione</p>
+									<strong>Origine:</strong>
+									<p th:text="${ingrediente.origine}">Descrizione</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			
+
+			<div th:replace="fragments/layout.html :: backButton(back='/', text1='Home', back2='/piatti', text2='Elenco Piatti')"></div>
+		</div> <!-- end container -->
+	</section>
+	
+	<footer th:replace="fragments/layout.html :: fondo"></footer>
+	<div th:replace="fragments/layout.html :: jsFiles"></div>
+</body>
+</html>

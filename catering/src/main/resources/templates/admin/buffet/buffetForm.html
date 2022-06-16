@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout.html :: headerfiles(title='Aggiungi Buffet')"> </head>
+<body>
+	<header th:replace="fragments/layout.html :: navMenu"></header>
+
+	<section class="generic_section layout_padding">
+		<div class="container">
+			<div class="heading_container">
+				<h2>Aggiungi Nuovo Buffet allo Chef</h2>
+			</div>
+
+
+			<div class="form_container">
+				<form th:action="@{/admin/buffet/aggiungiBuffet/} + ${idChef}" 
+					  method="post" th:object="${buffet}" enctype="multipart/form-data">
+					<div th:if="${#fields.hasGlobalErrors()}" class="alert alert-danger" role="alert">
+						<h4 align="center" th:each="err : ${#fields.globalErrors()}" th:text="'Errore: ' + ${err}">...</h4>
+					</div>
+					<div><input type="text" class="form-control" placeholder="Nome" th:field="*{nome}"></div>
+					<div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="alert alert-danger" role="alert"></div>
+
+					<div><input type="text" class="form-control" placeholder="Descrizione" th:field="*{descrizione}"></div>
+					<div th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}" class="alert alert-danger" role="alert"></div>
+
+					<div><input type="file" class="form-control-file" name="file"></div>
+
+					<div class="btn_box"><button type="submit">Aggiungi</button></div>
+				</form>
+			</div>
+
+		<div th:replace="fragments/layout.html :: backButton(back='/admin', text1='Dashboard', back2='/admin/chef', text2='Elenco Chefs')"></div>
+		</div> <!-- end container -->
+	</section>
+
+	<footer th:replace="fragments/layout.html :: fondo"></footer>
+	<div th:replace="fragments/layout.html :: jsFiles"></div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout.html :: headerfiles(title='Informazioni Chef')"> </head>
+<body>
+	<header th:replace="fragments/layout.html :: navMenu"></header>
+	
+	<section class="chef-background informations-section ">
+
+		<div th:if="${chef.img == 'profili'}" class="img-profile-informations">
+			<img src="/images/chef.png" alt="">
+		</div>
+		<div th:unless ="${chef.img == 'profili'}" class="img-profile-informations">
+			<img th:src="'/images/chef/profili/' + ${chef.img}" alt="Profile Chef">
+		</div>
+
+	</section>
+
+	<section class="generic_section layout_padding">
+		<div class="container">
+
+			<div class="card-informations" th:object="${chef}">
+				<div>
+					<strong>Nome: </strong><span th:text="*{nome}"></span><br>
+					<strong>Cognome: </strong><span th:text="*{cognome}"></span><br>
+					<strong>Nazionalità: </strong><span th:text="*{nazionalita}"></span><br>
+				</div>
+
+			</div>
+
+			<div class="boxInfo_section layout_padding">
+				<div class="heading_container">
+					<h2>Buffet Proposti dallo Chef</h2><br>
+				</div>
+
+				<div class="row grid">
+					<div th:each="buffet : ${buffets}" class="col-sm-6 col-lg-4 all">
+						<div class="box">
+							<div>
+								<div th:if="${buffet.img == 'profili'}" class="img-box">
+									<img src="/images/buffet.png" alt="">
+								</div>
+								<div th:unless ="${buffet.img == 'profili'}" class="img-box">
+									<img th:src="'/images/buffet/profili/' + ${buffet.img}" alt="">
+								</div>
+								<div class="detail-box">
+									<strong>Nome:</strong>
+									<p th:text="${buffet.nome}">Nome Buffet</p>
+									<strong>Descrizione:</strong>
+									<p th:text="${buffet.descrizione}">Descrizione</p>
+									<a th:href="@{/buffet/} + ${buffet.id}" class="btn btn-sm">Dettagli</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div th:replace="fragments/layout.html :: backButton(back='/', text1='Home', back2='/chefs', text2='Elenco Chefs')"></div>
+		</div> <!-- end container -->
+	</section>
+	
+	<footer th:replace="fragments/layout.html :: fondo"></footer>
+	<div th:replace="fragments/layout.html :: jsFiles"></div>
+</body>
+</html>
